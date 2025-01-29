@@ -17,7 +17,7 @@ export const Footer = () => {
             <p>Terms of Use</p>
           </Link>
           <Link href="#">
-            <p>FAQ's</p>
+            <p>FAQs</p>
           </Link>
           <Link href="#">
             <p>Acknowledgements</p>

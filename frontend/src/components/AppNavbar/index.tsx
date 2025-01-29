@@ -2,7 +2,6 @@
 
 import {
   Avatar,
-  Button,
   Input,
   Navbar,
   NavbarBrand,
