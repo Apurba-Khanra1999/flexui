@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
-import { AppNavbar } from "../ui/AppNavbar";
-import { Footer } from "../ui/Footer";
+import { AppNavbar } from "../components/ui/AppNavbar";
+import { Footer } from "../components/ui/Footer";
 
 export const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
