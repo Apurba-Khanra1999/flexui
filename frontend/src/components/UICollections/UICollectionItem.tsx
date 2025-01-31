@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Card, CardBody } from "@heroui/react";
+import { Card, CardBody, CardFooter } from "@heroui/react";
 
 export const UICollectionItem = ({
   icon,
@@ -13,10 +13,15 @@ export const UICollectionItem = ({
 }) => {
   return (
     <li>
-      <Card radius="sm" className="hover:animate-bounce">
-        <CardBody>
-          <div className="p-4 sm:p-6">
-            <div className="flex items-start justify-between">
+      <Card
+        isPressable
+        fullWidth
+        radius="sm"
+        className="hover:scale-105 border-md"
+      >
+        <CardBody className="p-0 overflow-hidden">
+          <div className="bg-gray-100 rounded-lg p-6">
+            <div className="flex items-center justify-center">
               <span
                 aria-hidden="true"
                 role="img"
@@ -25,12 +30,12 @@ export const UICollectionItem = ({
                 {icon}
               </span>
             </div>
-            <h2 className="mt-4 font-medium text-gray-900 sm:text-lg">
-              {title}
-            </h2>
-            <p className="mt-1 text-sm text-gray-700">{subtitle}</p>
           </div>
         </CardBody>
+        <CardFooter className="flex-col items-start">
+          <h2 className="font-medium text-gray-900 sm:text-lg">{title}</h2>
+          <p className="text-sm text-gray-700">{subtitle}</p>
+        </CardFooter>
       </Card>
     </li>
   );

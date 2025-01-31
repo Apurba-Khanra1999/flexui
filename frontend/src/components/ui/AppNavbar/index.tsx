@@ -44,19 +44,19 @@ export const AppNavbar = () => {
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
-        </NavbarItem>
         <NavbarItem isActive>
+          <Link color="foreground" href="#">
+            Home
+          </Link>
+        </NavbarItem>
+        <NavbarItem >
           <Link aria-current="page" href="#">
-            Customers
+            Components
           </Link>
         </NavbarItem>
         <NavbarItem>
           <Link color="foreground" href="#">
-            Integrations
+            About
           </Link>
         </NavbarItem>
       </NavbarContent>

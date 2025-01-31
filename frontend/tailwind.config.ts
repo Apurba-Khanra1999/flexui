@@ -14,9 +14,18 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+      },
+      animation: {
+        float: 'float 2.5s ease-in-out infinite',
+      },
     },
   },
 
-  // darkMode: "class",
-  plugins: [heroui()],
+  darkMode: "class",
+  plugins: [heroui(), require('daisyui')],
 } satisfies Config;
