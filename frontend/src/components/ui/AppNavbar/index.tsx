@@ -2,7 +2,6 @@
 
 import { AuthModal } from "@/components/Auth/AuthModal";
 import {
-  Avatar,
   Button,
   Input,
   Navbar,

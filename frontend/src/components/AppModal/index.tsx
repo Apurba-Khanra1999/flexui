@@ -21,16 +21,12 @@ export const AppModal = ({
   return (
     <Modal backdrop={backdrop} isOpen={isOpen} onClose={onClose} size={size}>
       <ModalContent>
-        {(onClose) => (
-          <>
-            <ModalHeader className="flex items-center justify-center">
-              {headerTitle}
-            </ModalHeader>
-            <ModalBody>{children}</ModalBody>
-            {ModalFooterComponent && (
-              <ModalFooter>{ModalFooterComponent}</ModalFooter>
-            )}
-          </>
+        <ModalHeader className="flex items-center justify-center">
+          {headerTitle}
+        </ModalHeader>
+        <ModalBody>{children}</ModalBody>
+        {ModalFooterComponent && (
+          <ModalFooter>{ModalFooterComponent}</ModalFooter>
         )}
       </ModalContent>
     </Modal>

@@ -16,7 +16,7 @@ export const AuthForm = () => {
             aria-label="Tabs form"
             selectedKey={selected}
             size="md"
-            onSelectionChange={(key: any) => setSelected(key)}
+            onSelectionChange={(key) => setSelected(key.toString())}
           >
             <Tab key="login" title="Login">
               <AppForm className="flex flex-col gap-4">
