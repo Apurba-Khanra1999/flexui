@@ -1,6 +1,7 @@
 // models/doc.js
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
+const { generateSlug } = require("../utils/generateUniqueSlug");
 
 const Doc = sequelize.define(
   "Doc",
@@ -29,10 +30,24 @@ const Doc = sequelize.define(
       allowNull: true,
       defaultValue: null,
     },
+    uniqueSlug: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      // Optionally, you can add a comment here:
+      // Example: "button" for a Button component
+    },
   },
   {
     timestamps: true,
   }
 );
+
+// Before validating a Doc instance, automatically generate a uniqueSlug if not provided.
+Doc.beforeValidate((doc, options) => {
+  if (!doc.uniqueSlug && doc.uiName) {
+    doc.uniqueSlug = generateSlug(doc.uiName);
+  }
+});
 
 module.exports = Doc;
