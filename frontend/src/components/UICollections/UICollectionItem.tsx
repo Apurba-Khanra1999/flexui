@@ -20,7 +20,7 @@ export const UICollectionItem = ({
         className="hover:scale-105 border-md"
       >
         <CardBody className="p-0 overflow-hidden">
-          <div className="bg-gray-100 rounded-lg p-6">
+          <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6">
             <div className="flex items-center justify-center">
               <span
                 aria-hidden="true"
@@ -33,8 +33,8 @@ export const UICollectionItem = ({
           </div>
         </CardBody>
         <CardFooter className="flex-col items-start">
-          <h2 className="font-medium text-gray-900 sm:text-lg">{title}</h2>
-          <p className="text-sm text-gray-700">{subtitle}</p>
+          <h2 className="font-medium sm:text-lg">{title}</h2>
+          <p className="text-sm">{subtitle}</p>
         </CardFooter>
       </Card>
     </li>

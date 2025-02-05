@@ -23,7 +23,7 @@ export const ProvidersLayout = ({
   return (
     <QueryClientProvider client={queryClient}>
       <HeroUIProvider>
-        <NextThemesProvider attribute="class" defaultTheme="light">
+        <NextThemesProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <GoogleOAuthProvider clientId={google_client_id as string}>
             {children}
           </GoogleOAuthProvider>
