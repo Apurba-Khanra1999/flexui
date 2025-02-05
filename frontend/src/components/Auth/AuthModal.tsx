@@ -1,8 +1,7 @@
-import { AuthModalType } from "@/utils/Types";
+import { ModalContext } from "@/utils/Context/ModalContext";
+import { useContext } from "react";
 import { AppModal } from "../AppModal";
 import { AuthForm } from "./AuthForm";
-import { useContext } from "react";
-import { ModalContext } from "@/utils/Context/ModalContext";
 
 export const AuthModal = () => {
   const { isOpen, onClose } = useContext(ModalContext);
