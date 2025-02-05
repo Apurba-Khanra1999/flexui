@@ -10,7 +10,7 @@ const axoisClient = axios.create({
 const request = async ({ ...options }:
     AxiosRequestConfig<any>
 ) => {
-    const onSuccess = (response: AxiosResponse) => response.data
+    const onSuccess = (response: AxiosResponse) => response?.data
     const onError = (error: AxiosError) => {
         if (error.response?.status === 403) {
             console.error("Access forbidden (403)");

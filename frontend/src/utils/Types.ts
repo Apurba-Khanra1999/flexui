@@ -20,3 +20,19 @@ export type AuthModalType = {
     isOpen: boolean
     onClose: () => void
 }
+
+export type CodeBlockProps {
+    className?: string;
+    children: string;
+}
+export type AuthFormType = {
+    username?: string;
+    email: string;
+    password: string;
+}
+export type UserAccountType = {
+    id: string;
+    username: string;
+    email: string;
+    profilePic: string;
+} 

@@ -9,10 +9,17 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "www.flaticon.com", // Replace with your image host domain
+      },
+      {
+        protocol: "https",
         hostname: "img.daisyui.com", // Replace with your image host domain
+      }, {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com", // Replace with your image host domain
       },
     ],
-    domains: ["images.unsplash.com", "img.daisyui.com"], // Alternative method (simpler)
+    domains: ["images.unsplash.com", "img.daisyui.com", "www.flaticon.com", "lh3.googleusercontent.com"], // Alternative method (simpler)
   },
 
 };

@@ -3,10 +3,21 @@
 import { Button, Card, CardBody, Input, Link, Tab, Tabs } from "@heroui/react";
 import React from "react";
 import { AppForm } from "../AppForm";
+import useHandleAuth from "@/utils/Hooks/useHandleAuth";
+import { AuthFormType } from "@/utils/Types";
+import { GoogleButton } from "../ui/GoogleButton";
+import useGoogleAuth from "@/utils/Hooks/uesGoogleAuth";
 
 export const AuthForm = () => {
   const [selected, setSelected] = React.useState("login");
-
+  const { isPending, mutate } = useHandleAuth();
+  const { google_auth } = useGoogleAuth();
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    let data = Object.fromEntries(new FormData(e.currentTarget));
+    // mutate({JSON.stringify(data, null, 2)})
+    mutate(data as AuthFormType);
+  };
   return (
     <div className="flex flex-col w-full">
       <Card className="max-w-full">
@@ -19,10 +30,14 @@ export const AuthForm = () => {
             onSelectionChange={(key) => setSelected(key.toString())}
           >
             <Tab key="login" title="Login">
-              <AppForm className="flex flex-col gap-4">
+              <AppForm
+                onSubmit={handleFormSubmit}
+                className="flex flex-col gap-4"
+              >
                 <Input
                   isRequired
                   label="Email"
+                  name="email"
                   placeholder="Enter your email"
                   type="email"
                   labelPlacement="outside"
@@ -31,6 +46,7 @@ export const AuthForm = () => {
                 <Input
                   isRequired
                   label="Password"
+                  name="password"
                   placeholder="Enter your password"
                   type="password"
                   labelPlacement="outside"
@@ -45,18 +61,26 @@ export const AuthForm = () => {
                     Sign up
                   </Link>
                 </p>
-                <div className="w-full">
-                  <Button fullWidth color="primary">
+                <div className="w-full flex flex-col gap-y-4">
+                  <Button type="submit" fullWidth color="primary">
                     Login
                   </Button>
+                  <GoogleButton
+                    title="Login With Google"
+                    onPress={() => google_auth()}
+                  />
                 </div>
               </AppForm>
             </Tab>
             <Tab key="sign-up" title="Sign up">
-              <AppForm className="flex flex-col gap-4">
+              <AppForm
+                className="flex flex-col gap-4"
+                onSubmit={handleFormSubmit}
+              >
                 <Input
                   isRequired
                   label="Name"
+                  name="username"
                   placeholder="Enter your name"
                   type="string"
                   labelPlacement="outside"
@@ -68,6 +92,7 @@ export const AuthForm = () => {
                 <Input
                   isRequired
                   label="Email"
+                  name="email"
                   placeholder="Enter your email"
                   type="email"
                   labelPlacement="outside"
@@ -76,6 +101,7 @@ export const AuthForm = () => {
                 <Input
                   isRequired
                   label="Password"
+                  name="password"
                   placeholder="Enter your password"
                   type="password"
                   labelPlacement="outside"
@@ -90,10 +116,14 @@ export const AuthForm = () => {
                     Login
                   </Link>
                 </p>
-                <div className="w-full">
-                  <Button fullWidth color="primary">
+                <div className="w-full flex flex-col gap-y-4">
+                  <Button type="submit" fullWidth color="primary">
                     Sign up
                   </Button>
+                  <GoogleButton
+                    title="Signup With Google"
+                    onPress={() => google_auth()}
+                  />
                 </div>
               </AppForm>
             </Tab>

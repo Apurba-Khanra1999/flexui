@@ -1,11 +1,8 @@
-"use client";
 
-import { ElementPage } from "@/components/Pages/ElementPage";
-import { useParams } from "next/navigation";
+import ElementPage from "@/components/Pages/ElementPage";
 
-function Element() {
-  const params = useParams();
-  const element = params?.element;
+async function Element({params}: {params: {element: string}}) {
+  const { element } = await params;
   return <ElementPage element={element as string}/>;
 }
 

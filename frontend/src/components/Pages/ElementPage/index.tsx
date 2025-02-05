@@ -1,46 +1,64 @@
-// pages/element/[element].js
-import React from "react";
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import { serialize } from "next-mdx-remote/serialize";
 import remarkGfm from "remark-gfm";
+import {
+  MDXComponents,
+  MDXRemote,
+  type MDXRemoteOptions,
+} from "next-mdx-remote-client/rsc";
 import rehypeHighlight from "rehype-highlight";
-import "highlight.js/styles/github.css";
+import "highlight.js/styles/night-owl.css";
 import { GET_ELEMENT_DETAILS } from "@/utils/AxiosUtils/api";
+import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
+import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import ErrorComponent from "@/components/ui/ErrorComponent";
+import request from "@/utils/AxiosUtils";
+import MDXComponent from "@/components/MDXComponent";
+import CodePreviewComponet from "@/components/CodeComponets/CodePreviewComponet";
 
-export default function ElementPage({ mdxSource, frontMatter }:{
-  mdxSource: MDXRemoteSerializeResult<Record<string, unknown>, Record<string, unknown>>,
-  frontMatter: { title: string }
-}) {
-  return (
-    <div>
-      <h1>{frontMatter.title}</h1>
-      <MDXRemote {...mdxSource} />
-    </div>
-  );
+interface FrontMatter {
+  title: string;
 }
 
-export async function getServerSideProps({ params }:{
-  params: { element: string }
-}) {
-  const { element } = params;
-  
-  // Fetch the MDX text from your external API
-  const res = await fetch(`http://localhost:3400/api${GET_ELEMENT_DETAILS}/${element}`);
-  const data = await res.json();
+interface ElementData {
+  mdxSource: string;
+}
 
-  // Assume data.docs holds the MDX text and data.frontMatter holds meta info
-  const mdxSource = await serialize(data.docs, {
-    mdxOptions: {
-      remarkPlugins: [remarkGfm],
-      rehypePlugins: [rehypeHighlight],
-    },
-    scope: data.frontMatter || {},
+// async function getElementData(element: string): Promise<ElementData> {
+//   const data = await request({"url":`${GET_ELEMENT_DETAILS}/${element}`,"method":"GET"});
+
+//   const mdxSource = data?.docs;
+
+//   // // Serialize MDX content
+//   // const mdxSource = await serialize(data?.docs, {
+//   //   mdxOptions: {
+//   //     remarkPlugins: [remarkGfm],
+//   //     rehypePlugins: [rehypeHighlight],
+//   //   },
+//   //   scope: data.frontMatter || {},
+//   // });
+
+//   // console.log(mdxSource);
+//   return {mdxSource}
+// }
+
+export default async function ElementPage({ element }: { element: string }) {
+  const data = await request({
+    url: `${GET_ELEMENT_DETAILS}/${element}`,
+    method: "GET",
   });
 
-  return {
-    props: {
-      mdxSource,
-      frontMatter: data.frontMatter || { title: element },
-    },
-  };
+  return (
+    <div>
+      <div>
+        <h1 className="font-bold text-4xl">{data?.uiName}</h1>
+        <p className="text-md font-semibold my-2">{data?.uiSubtitle}</p>
+      </div>
+      <div>
+        <CodePreviewComponet codeList={data?.codes} />
+      </div>
+
+      <div>
+        <MDXComponent mdxText={data?.docs} />
+      </div>
+    </div>
+  );
 }

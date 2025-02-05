@@ -1,8 +1,11 @@
 import { AuthModalType } from "@/utils/Types";
 import { AppModal } from "../AppModal";
 import { AuthForm } from "./AuthForm";
+import { useContext } from "react";
+import { ModalContext } from "@/utils/Context/ModalContext";
 
-export const AuthModal = ({ isOpen, onClose }: AuthModalType) => {
+export const AuthModal = () => {
+  const { isOpen, onClose } = useContext(ModalContext);
   return (
     <AppModal
       headerTitle="Please Login To Continue."

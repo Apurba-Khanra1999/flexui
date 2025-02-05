@@ -1,6 +1,9 @@
 "use client";
 
 import { AuthModal } from "@/components/Auth/AuthModal";
+import ProfileDropdown from "@/components/Auth/ProfileDropdown";
+import { AccountContext } from "@/utils/Context/AccountContext";
+import { ModalContext } from "@/utils/Context/ModalContext";
 import {
   Button,
   Input,
@@ -14,14 +17,14 @@ import {
   useDisclosure,
 } from "@heroui/react";
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
 import { BiSearch } from "react-icons/bi";
 import { BsStack } from "react-icons/bs";
 
 export const AppNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { accountData } = useContext(AccountContext);
+  const { onOpen } = useContext(ModalContext);
   const menuItems = [
     "Profile",
     "Dashboard",
@@ -96,10 +99,14 @@ export const AppNavbar = () => {
           type="search"
         />
         <div>
-          <Button size="sm" color="primary" onPress={onOpen}>
-            Sign In.
-          </Button>
-          <AuthModal isOpen={isOpen} onClose={onClose} />
+          {accountData.username ? (
+            <ProfileDropdown />
+          ) : (
+            <Button size="sm" color="primary" onPress={() => onOpen()}>
+              Sign In.
+            </Button>
+          )}
+          <AuthModal />
         </div>
       </NavbarContent>
       <NavbarMenu>
@@ -111,8 +118,8 @@ export const AppNavbar = () => {
                 index === 2
                   ? "primary"
                   : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
+                    ? "danger"
+                    : "foreground"
               }
               href="#"
             >

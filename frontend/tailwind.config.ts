@@ -26,6 +26,6 @@ export default {
     },
   },
 
-  darkMode: "class",
+  // darkMode: "class",
   plugins: [heroui(), require('daisyui')],
 } satisfies Config;
