@@ -1,12 +1,13 @@
 "use client";
 
-import useGoogleAuth from "@/utils/Hooks/uesGoogleAuth";
-import useHandleAuth from "@/utils/Hooks/useHandleAuth";
+
 import { AuthFormType } from "@/utils/Types";
 import { Button, Card, CardBody, Input, Link, Tab, Tabs } from "@heroui/react";
 import React from "react";
 import { AppForm } from "../AppForm";
 import { GoogleButton } from "../ui/GoogleButton";
+import useHandleAuth from "@/utils/hooks/useHandleAuth";
+import useGoogleAuth from "@/utils/hooks/uesGoogleAuth";
 
 export const AuthForm = () => {
   const [selected, setSelected] = React.useState("login");

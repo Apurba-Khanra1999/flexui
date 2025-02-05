@@ -1,5 +1,7 @@
 import prettier from 'prettier';
 
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
 export const stripHtml = (html: string): string => {
     return html.replace(/<[^>]*>/g, "").trim(); // Remove all HTML tags
   };
@@ -14,3 +16,7 @@ export const formatCode = async(code:string, language:string) => {
   });
   return formattedCode;
 };
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}

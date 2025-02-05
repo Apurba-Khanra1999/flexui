@@ -20,23 +20,21 @@ import Link from "next/link";
 import React, { useContext } from "react";
 import { BiSearch } from "react-icons/bi";
 import { BsStack } from "react-icons/bs";
+import { ThemeSwitcher } from "../ThemeSwitcher";
+import { usePathname } from "next/navigation";
+
+const menuItems = [
+  { name: "Home", href: "/" },
+  { name: "Elements", href: "/elements" },
+  { name: "About", href: "/about" },
+];
 
 export const AppNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const { accountData } = useContext(AccountContext);
   const { onOpen } = useContext(ModalContext);
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
+  const pathname = usePathname();
+
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} maxWidth="xl" isBordered>
       <NavbarContent>
@@ -44,28 +42,22 @@ export const AppNavbar = () => {
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
-        <NavbarBrand className="gap-2 sm:text-xl font-bold">
-          <BsStack />
-          <p className="font-bold text-inherit">FlexUI.</p>
-        </NavbarBrand>
+        <Link href="/">
+          <NavbarBrand className="gap-2 sm:text-xl font-bold">
+            <BsStack />
+            <p className="font-bold text-inherit">FlexUI.</p>
+          </NavbarBrand>
+        </Link>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem isActive>
-          <Link color="foreground" href="#">
-            Home
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link aria-current="page" href="#">
-            Components
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            About
-          </Link>
-        </NavbarItem>
+        {menuItems.map((item, index) => (
+          <NavbarItem key={index} isActive={pathname === item.href}>
+            <Link href={item.href} color="foreground">
+              {item.name}
+            </Link>
+          </NavbarItem>
+        ))}
       </NavbarContent>
       <NavbarContent className="items-center sm:hidden" justify="center">
         <NavbarItem>
@@ -108,22 +100,25 @@ export const AppNavbar = () => {
           )}
           <AuthModal />
         </div>
+        <div className="hidden sm:block">
+          <ThemeSwitcher />
+        </div>
       </NavbarContent>
       <NavbarMenu>
+        <NavbarMenuItem>
+          <ThemeSwitcher />
+        </NavbarMenuItem>
         {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
+          <NavbarMenuItem
+            key={`${item}-${index}`}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
             <Link
-              className="w-full"
-              color={
-                index === 2
-                  ? "primary"
-                  : index === menuItems.length - 1
-                    ? "danger"
-                    : "foreground"
-              }
-              href="#"
+              className={`w-full text-base font-medium ${pathname === item.href ? "text-primary" : "text-base"}`}
+              href={item.href}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {item}
+              {item.name}
             </Link>
           </NavbarMenuItem>
         ))}

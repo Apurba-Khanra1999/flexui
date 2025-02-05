@@ -6,15 +6,15 @@ export const Intro = () => {
   return (
     <div className="text-center lg:text-left">
       <div className="flex flex-col space-y-4 space-y-reverse">
-        <h1 className="order-last text-lg text-gray-700 font-semibold">
+        <h1 className="order-last text-lg  font-semibold">
           Free Open Source Tailwind CSS Components
         </h1>
-        <h2 className="text-6xl font-bold text-gray-900 xl:text-9xl">
+        <h2 className="text-6xl font-bold xl:text-9xl">
           FlexUI.
         </h2>
       </div>
       <div className="mx-auto lg:mx-0 mt-6 max-w-xl space-y-6">
-        <p className="text-base/relaxed text-pretty text-gray-700 lg:max-w-80">
+        <p className="text-base/relaxed text-pretty lg:max-w-80">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi
           debitis nemo laboriosam minima omnis! Earum architecto quis quae
           eveniet adipisci tenetur saepe quo.

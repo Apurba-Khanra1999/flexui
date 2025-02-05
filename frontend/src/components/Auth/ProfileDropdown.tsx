@@ -1,6 +1,7 @@
 "use client";
 import { AccountContext } from "@/utils/Context/AccountContext";
-import useLogout from "@/utils/Hooks/useLogout";
+import useLogout from "@/utils/hooks/useLogout";
+import profileImg from "../../../public/user-image.png";
 import {
   Avatar,
   Button,
@@ -17,18 +18,27 @@ export default function ProfileDropdown() {
   return (
     <Dropdown placement="bottom-end">
       <DropdownTrigger>
-        <Avatar
-          isBordered
-          as="button"
-          className="transition-transform"
-          //   color="secondary"
-          name={accountData.username}
-          size="sm"
-          src={
-            accountData.profilePic ||
-            "https://www.flaticon.com/free-icons/profile-image"
-          }
-        />
+        {accountData.profilePic ? (
+          <Avatar
+            isBordered
+            as="button"
+            className="transition-transform"
+            //   color="secondary"
+            name={accountData.username}
+            size="sm"
+            src={accountData.profilePic}
+          />
+        ) : (
+          <Avatar
+            isBordered
+            as="button"
+            className="transition-transform"
+            //   color="secondary"
+            name={accountData.username}
+            size="sm"
+            src={profileImg.src}
+          />
+        )}
       </DropdownTrigger>
       <DropdownMenu aria-label="Profile Actions" variant="flat">
         <DropdownItem key="profile" className="h-14 gap-2">
@@ -37,7 +47,7 @@ export default function ProfileDropdown() {
         </DropdownItem>
         <DropdownItem key="id">{accountData.id}</DropdownItem>
         <DropdownItem key="username">{accountData.username}</DropdownItem>
-        <DropdownItem key="logout" color="danger">
+        <DropdownItem key="logout">
           <Button onPress={logout} color="danger">
             Log Out
           </Button>
