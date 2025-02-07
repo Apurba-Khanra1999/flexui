@@ -21,9 +21,9 @@ export type AuthModalType = {
     onClose: () => void
 }
 
-export type CodeBlockProps {
+export type CodeBlockProps = {
     className?: string;
-    children: string;
+    code: string;
 }
 export type AuthFormType = {
     username?: string;
@@ -43,7 +43,7 @@ export type ComponetPreviewType = {
     componentTitle: string;
     previewWidth?: string | number | undefined;
     previewHeight?: string | number | undefined;
-    refIframe?: React.RefObject<any | null>;
+    refIframe?: React.RefObject<HTMLIFrameElement | null>;
     previewDark?: boolean;
 }
 

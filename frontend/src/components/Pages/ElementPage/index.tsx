@@ -1,26 +1,16 @@
-import remarkGfm from "remark-gfm";
-import {
-  MDXComponents,
-  MDXRemote,
-  type MDXRemoteOptions,
-} from "next-mdx-remote-client/rsc";
-import rehypeHighlight from "rehype-highlight";
-import "highlight.js/styles/night-owl.css";
-import { GET_ELEMENT_DETAILS } from "@/utils/AxiosUtils/api";
-import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
-import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import ErrorComponent from "@/components/ui/ErrorComponent";
-import request from "@/utils/AxiosUtils";
-import MDXComponent from "@/components/MDXComponent";
 import CodePreviewComponet from "@/components/CodeComponets/CodePreviewComponet";
+import MDXComponent from "@/components/MDXComponent";
+import request from "@/utils/AxiosUtils";
+import { GET_ELEMENT_DETAILS } from "@/utils/AxiosUtils/api";
+import "highlight.js/styles/night-owl.css";
 
-interface FrontMatter {
-  title: string;
-}
+// interface FrontMatter {
+//   title: string;
+// }
 
-interface ElementData {
-  mdxSource: string;
-}
+// interface ElementData {
+//   mdxSource: string;
+// }
 
 // async function getElementData(element: string): Promise<ElementData> {
 //   const data = await request({"url":`${GET_ELEMENT_DETAILS}/${element}`,"method":"GET"});

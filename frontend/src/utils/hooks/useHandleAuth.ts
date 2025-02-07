@@ -1,15 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
-import { AxiosResponse } from "axios";
+import { Dispatch, SetStateAction, useContext } from "react";
 import request from "../AxiosUtils";
 import { SIGN_IN, SIGN_UP } from "../AxiosUtils/api";
-import { AuthFormType, UserAccountType } from "../Types";
-import { profile } from "console";
-import { Dispatch, SetStateAction, useContext } from "react";
 import { AccountContext } from "../Context/AccountContext";
 import { ModalContext } from "../Context/ModalContext";
+import { AuthFormType, UserAccountType } from "../Types";
 
 
-export const AuthHandle = (responseData: Record<string, any>, setAccountData: Dispatch<SetStateAction<UserAccountType>>) => {
+export const AuthHandle = (responseData: Record<string, UserAccountType>, setAccountData: Dispatch<SetStateAction<UserAccountType>>) => {
   const userObj = {
     username: responseData?.user?.username,
     email: responseData?.user?.email,

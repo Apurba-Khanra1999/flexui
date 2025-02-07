@@ -8,7 +8,7 @@ const axoisClient = axios.create({
 })
 
 const request = async ({ ...options }:
-    AxiosRequestConfig<any>
+    AxiosRequestConfig<unknown>
 ) => {
     const onSuccess = (response: AxiosResponse) => response?.data
     const onError = (error: AxiosError) => {

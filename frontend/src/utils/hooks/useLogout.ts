@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { AccountContext } from '../Context/AccountContext'
 
 function useLogout() {
-    const {setAccountData} = useContext(AccountContext)
+    const { setAccountData } = useContext(AccountContext)
     const logout = () => {
         const nullAccount = {
             username: "",
@@ -13,7 +13,7 @@ function useLogout() {
         setAccountData(nullAccount)
         localStorage.removeItem("account")
     }
-  return {logout}
+    return { logout }
 }
 
 export default useLogout

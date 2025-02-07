@@ -1,11 +1,10 @@
 
 import { TokenResponse, useGoogleLogin } from "@react-oauth/google";
 
-import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useContext } from "react";
 import { AccountContext } from "../Context/AccountContext";
-import { UserAccountType } from "../Types";
 import { ModalContext } from "../Context/ModalContext";
+import { UserAccountType } from "../Types";
 const GoogleAuthHandle = (
     responseData: Omit<TokenResponse, "error" | "error_description" | "error_uri">, setAccountData: Dispatch<SetStateAction<UserAccountType>>
 

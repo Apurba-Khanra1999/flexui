@@ -1,7 +1,3 @@
-import React from 'react'
-
 export const ElementsPage = () => {
-  return (
-    <div>ElementsPage</div>
-  )
-}
+  return <div>ElementsPage</div>;
+};

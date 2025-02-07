@@ -15,7 +15,7 @@ export const AuthForm = () => {
   const { google_auth } = useGoogleAuth();
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let data = Object.fromEntries(new FormData(e.currentTarget));
+    const data = Object.fromEntries(new FormData(e.currentTarget));
     // mutate({JSON.stringify(data, null, 2)})
     mutate(data as AuthFormType);
   };

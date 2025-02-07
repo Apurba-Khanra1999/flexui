@@ -1,12 +1,11 @@
 import { MDXRemote, MDXRemoteOptions } from "next-mdx-remote-client/rsc";
-import React, { Suspense } from "react";
-import rehypeHighlight from "rehype-highlight";
+import { Suspense } from "react";
 import remarkGfm from "remark-gfm";
 import ErrorComponent from "../ui/ErrorComponent";
 import { Loader } from "../ui/Loader";
 import { CustomComponets } from "./CustomComponets";
 
-export default async function MDXComponent({ mdxText }:{mdxText: string}) {
+export default async function MDXComponent({ mdxText }: { mdxText: string }) {
   const options: MDXRemoteOptions = {
     mdxOptions: {
       remarkPlugins: [remarkGfm],

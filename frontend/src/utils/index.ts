@@ -1,8 +1,8 @@
 import * as babel from "@babel/parser";
 import prettier from 'prettier';
 
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 export const stripHtml = (html: string): string => {
   return html.replace(/<[^>]*>/g, "").trim(); // Remove all HTML tags
 };
@@ -31,6 +31,7 @@ export const isJSXCode = (code: string) => {
     });
     return true; // Parsing succeeded, it's JSX/TSX
   } catch (error) {
+    console.log(error)
     return false; // Parsing failed, not JSX/TSX
   }
 };
@@ -40,7 +41,7 @@ export const extractHTMLFromJSX = (code: string) => {
 
     const jsxHtmlRegex = /<([a-zA-Z][^\s/>]*)[^>]*>(.*?)<\/\1>/gs;
 
-    let matches = [];
+    const matches = [];
     let match;
 
     while ((match = jsxHtmlRegex.exec(code)) !== null) {

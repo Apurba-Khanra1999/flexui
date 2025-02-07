@@ -1,10 +1,9 @@
 import MDXComponent from "@/components/MDXComponent";
-import React from "react";
 
 export default function ElementComponent({
   data,
 }: {
-  data: Record<string, any>;
+  data: Record<string, string>;
 }) {
   return (
     <div>

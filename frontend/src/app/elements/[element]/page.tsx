@@ -1,7 +1,12 @@
 
 import ElementPage from "@/components/Pages/ElementPage";
 
-async function Element({params}: {params: {element: string}}) {
+interface PageProps {
+  params: { element: string };
+}
+
+
+async function Element({params}:PageProps) {
   const { element } = await params;
   return <ElementPage element={element as string}/>;
 }

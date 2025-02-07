@@ -14,14 +14,13 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
-  useDisclosure,
 } from "@heroui/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useContext } from "react";
 import { BiSearch } from "react-icons/bi";
 import { BsStack } from "react-icons/bs";
 import { ThemeSwitcher } from "../ThemeSwitcher";
-import { usePathname } from "next/navigation";
 
 const menuItems = [
   { name: "Home", href: "/" },

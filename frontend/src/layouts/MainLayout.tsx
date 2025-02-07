@@ -1,11 +1,11 @@
 "use client";
-import React, { Fragment, use } from "react";
+import { useTheme } from "next-themes";
+import React, { Fragment } from "react";
 import { AppNavbar } from "../components/ui/AppNavbar";
 import { Footer } from "../components/ui/Footer";
-import { useTheme } from "next-themes";
 
 export const MainLayout = ({ children }: { children: React.ReactNode }) => {
-  const {theme} = useTheme();
+  const { theme } = useTheme();
   return (
     <Fragment>
       <main className={`${theme} text-foreground bg-background`}>
