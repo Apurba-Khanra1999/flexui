@@ -35,4 +35,15 @@ export type UserAccountType = {
     username: string;
     email: string;
     profilePic: string;
-} 
+}
+
+export type ComponetPreviewType = {
+    showPreview?: boolean;
+    code: string;
+    componentTitle: string;
+    previewWidth?: string | number | undefined;
+    previewHeight?: string | number | undefined;
+    refIframe?: React.RefObject<any | null>;
+    previewDark?: boolean;
+}
+

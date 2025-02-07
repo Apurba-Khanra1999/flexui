@@ -1,14 +1,31 @@
-import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
-import "tailwindcss/tailwind.css";
-export default function ComponentPreview({ code }: { code: string }) {
-  console.log(code);
+import { extractHTMLFromJSX } from "@/utils";
+import { ComponetPreviewType } from "@/utils/Types";
+
+export default function ComponentPreview({
+  showPreview,
+  code,
+  componentTitle,
+  previewWidth = "100%",
+  previewHeight = "h-[400px] lg:h-[600px]",
+  refIframe,
+  previewDark,
+}: ComponetPreviewType) {
+  const iframeTheme = previewDark ? "bg-gray-950" : "bg-white";
+  const htmlCode = extractHTMLFromJSX(code);
+  console.log(htmlCode);
   return (
-    <LiveProvider code={code} >
-      <div className="grid grid-cols-2 gap-4">
-        <LiveEditor className="font-mono" />
-        <LivePreview />
-        <LiveError />
-      </div>
-    </LiveProvider>
+    <div
+      
+      className="rounded-md"
+    >
+      <iframe
+        className={`w-full rounded-md ring-2 ring-gray-900 lg:transition-all ${iframeTheme} ${previewHeight}`}
+        loading="lazy"
+        srcDoc={htmlCode as string}
+        style={{ maxWidth: previewWidth }}
+        title={`${componentTitle} Component`}
+        ref={refIframe}
+      ></iframe>
+    </div>
   );
 }

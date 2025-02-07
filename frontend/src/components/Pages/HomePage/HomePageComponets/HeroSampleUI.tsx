@@ -1,7 +1,7 @@
 import { SampleAlert } from "@/components/SampleUI/SampleAlert";
 import { SampleAvatar } from "@/components/SampleUI/SampleAvatar";
 import { SampleBadge } from "@/components/SampleUI/SampleBadge";
-import { SampleButton } from "@/components/SampleUI/SampleButton";
+import SampleButton from "@/components/SampleUI/SampleButton";
 import { SampleCard } from "@/components/SampleUI/SampleCard";
 import { SampleLoading } from "@/components/SampleUI/SampleLoading";
 import { SampleSelect } from "@/components/SampleUI/SampleSelect";
@@ -15,7 +15,7 @@ export const HeroSampleUI = () => {
       <div className="flex flex-wrap items-start gap-6">
         <SampleAlert />
         <SampleAvatar />
-        <SampleSelect/>
+        <SampleSelect />
         <SampleSwap />
         <SampleBadge />
         <SampleLoading />
