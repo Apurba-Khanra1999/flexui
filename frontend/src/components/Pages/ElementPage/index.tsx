@@ -43,7 +43,7 @@ export default async function ElementPage({ element }: { element: string }) {
         <p className="text-md font-semibold my-2">{data?.uiSubtitle}</p>
       </div>
       <div>
-        <CodePreviewComponet codeList={data?.codes} />
+        <CodePreviewComponet codeList={data?.codes} elementTitle={data?.uiName}/>
       </div>
 
       <div>

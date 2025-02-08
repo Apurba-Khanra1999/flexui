@@ -7,7 +7,7 @@ export default function ComponentPreview({
   code,
   componentTitle,
   previewWidth = "100%",
-  previewHeight = "h-[400px] lg:h-[600px]",
+  previewHeight = "h-auto",
   // refIframe,
   previewDark,
 }: ComponetPreviewType) {
@@ -30,14 +30,14 @@ export default function ComponentPreview({
         iframeDocument.head.appendChild(link);
 
         // Inject component HTML safely
-        iframeDocument.body.innerHTML = `<div class="p-4">${htmlCode}</div>`;
+        iframeDocument.body.innerHTML = `<div class="p-4 w-full flex  justify-center">${htmlCode}</div>`;
       }
     }
   }, [code]);
   return (
     <div className="rounded-md">
       <iframe
-        className={`w-full rounded-md ring-2 ring-gray-900 lg:transition-all ${iframeTheme} ${previewHeight}`}
+        className={`w-full rounded-lg overflow-hidden lg:transition-all ${iframeTheme} ${previewHeight}`}
         loading="lazy"
         // srcDoc={htmlCode as string}
         style={{ maxWidth: previewWidth }}
