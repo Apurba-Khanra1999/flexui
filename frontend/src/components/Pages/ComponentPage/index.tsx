@@ -41,6 +41,7 @@ export default async function ComponentPage({
     method: "GET",
   });
   return (
+    
     <div>
       <div>
         <div>

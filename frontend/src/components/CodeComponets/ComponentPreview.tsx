@@ -18,7 +18,7 @@ export default function ComponentPreview({
   const [componentBreakpoint, setComponetBreakpoint] =
     useState<ComponentBreakpointsType>({ name: "full", width: "100%" });
 
-  // console.log(componentBreakpoint);
+  console.log(componentBreakpoint);
   useEffect(() => {
     const htmlCode = extractHTMLFromJSX(code);
     if (iframeRef.current) {
