@@ -2,8 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   redirects: async () => [{
-    source: "/elements",
-    destination: "/elements/button",
+    source: "/components",
+    destination: "/components/button",
     permanent: true, // Set to false for temporary redirect (302)
   }],
 

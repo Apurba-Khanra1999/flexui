@@ -23,7 +23,7 @@ export type AuthModalType = {
 
 export type CodeBlockProps = {
     className?: string;
-    code: string;
+    children: string;
 }
 export type AuthFormType = {
     username?: string;
@@ -43,7 +43,10 @@ export type ComponetPreviewType = {
     componentTitle: string;
     previewWidth?: string | number | undefined;
     previewHeight?: string | number | undefined;
-    refIframe?: React.RefObject<HTMLIFrameElement | null>;
-    previewDark?: boolean;
+    iframeRef?: React.RefObject<HTMLIFrameElement | null>;
 }
 
+export type ComponentBreakpointsType = {
+    name: string;
+    width: string;
+}

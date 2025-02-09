@@ -22,7 +22,7 @@ router.delete("/deleteDoc/:id", deleteDoc);
 router.get("/getDocByUniqueSlug/:uniqueSlug", getDocByUniqueSlug);
 
 // Retrieve all docs with uiName and uniqueSlug fields
-router.get("/unique-slugs", getUniqueSlugs);
+router.get("/getUniqueSlugs/get-docs-list", getUniqueSlugs);
 // Route for creating a variant for an existing doc
 router.post("/createVariant/:id", createVariant);
 

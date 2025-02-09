@@ -1,19 +1,24 @@
 import { extractHTMLFromJSX } from "@/utils";
-import { ComponetPreviewType } from "@/utils/Types";
-import { useEffect, useRef } from "react";
+import { componentBreakpointsData } from "@/utils/data/ComponentBreakpointsData";
+import { ComponentBreakpointsType } from "@/utils/Types";
+import { Divider } from "@heroui/react";
+import { useEffect, useRef, useState } from "react";
+import ComponetBreakpoints from "./ComponetBreakpoints";
+import ComponetPreviewIframe from "./ComponetPreviewIframe";
+import CopyButton from "../ui/CopyButton";
 
 export default function ComponentPreview({
-  // showPreview,
   code,
   componentTitle,
-  previewWidth = "100%",
-  previewHeight = "h-auto",
-  // refIframe,
-  previewDark,
-}: ComponetPreviewType) {
-  const iframeTheme = previewDark ? "bg-gray-950" : "bg-white";
+}: {
+  code: string;
+  componentTitle: string;
+}) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [componentBreakpoint, setComponetBreakpoint] =
+    useState<ComponentBreakpointsType>({ name: "full", width: "100%" });
 
+  // console.log(componentBreakpoint);
   useEffect(() => {
     const htmlCode = extractHTMLFromJSX(code);
     if (iframeRef.current) {
@@ -35,15 +40,36 @@ export default function ComponentPreview({
     }
   }, [code]);
   return (
-    <div className="rounded-md">
-      <iframe
-        className={`w-full rounded-lg overflow-hidden lg:transition-all ${iframeTheme} ${previewHeight}`}
-        loading="lazy"
-        // srcDoc={htmlCode as string}
-        style={{ maxWidth: previewWidth }}
-        title={`${componentTitle} Component`}
-        ref={iframeRef}
-      ></iframe>
+    <div
+      className="border border-slate-700 rounded-md"
+      style={{ maxWidth: componentBreakpoint.width }}
+    >
+      <div className="flex items-center justify-between px-4 py-2 ">
+        <div className="flex gap-2">
+          {componentBreakpointsData.map((item, index) => (
+            <ComponetBreakpoints
+              key={index}
+              title={item.name}
+              icon={item.icon}
+              width={item.width}
+              componentBreakpoint={componentBreakpoint}
+              setComponetBreakpoint={setComponetBreakpoint}
+            />
+          ))}
+        </div>
+        <div>
+          <CopyButton value={code} />
+        </div>
+      </div>
+      <Divider />
+      <div className="p-4">
+        <ComponetPreviewIframe
+          code={code}
+          componentTitle={componentTitle}
+          iframeRef={iframeRef}
+          previewWidth={componentBreakpoint.width}
+        />
+      </div>
     </div>
   );
 }

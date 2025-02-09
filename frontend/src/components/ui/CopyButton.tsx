@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@heroui/react";
+import { Button, Tooltip } from "@heroui/react";
 import { useClipboard } from "@heroui/use-clipboard";
 import { TbCopyCheckFilled, TbCopyPlusFilled } from "react-icons/tb";
 
@@ -12,20 +12,22 @@ function CopyButton({
 }) {
   const { copy, copied } = useClipboard();
   return (
-    <Button
-      startContent={
-        copied ? (
-          <TbCopyCheckFilled size={18} />
-        ) : (
-          <TbCopyPlusFilled size={18} />
-        )
-      }
-      isIconOnly
-      size="sm"
-      color="primary"
-      className={className}
-      onPress={() => copy(value)}
-    />
+    <Tooltip content={copied ? "Copied!" : "Copy"}>
+      <Button
+        startContent={
+          copied ? (
+            <TbCopyCheckFilled size={18} />
+          ) : (
+            <TbCopyPlusFilled size={18} />
+          )
+        }
+        isIconOnly
+        size="sm"
+        // color="primary"
+        className={className}
+        onPress={() => copy(value)}
+      />
+    </Tooltip>
   );
 }
 

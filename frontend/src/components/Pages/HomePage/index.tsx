@@ -14,7 +14,7 @@ export const HomePage = () => {
       </div>
       <div className="my-12">
         <UICollectionsWrapper
-          title="UI Elements"
+          title="UI Components"
           subtitle="Copy Components as HTML/CSS, Tailwind, TSX, JSX and Vue."
         >
           {DemoData.map((item, index) => (

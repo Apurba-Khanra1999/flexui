@@ -1,8 +1,10 @@
 import * as babel from "@babel/parser";
 import prettier from 'prettier';
-
+import babelParser from "@babel/parser";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+const tsParser = require("prettier/parser-typescript");
+
 export const stripHtml = (html: string): string => {
   return html.replace(/<[^>]*>/g, "").trim(); // Remove all HTML tags
 };
@@ -10,10 +12,29 @@ export const stripHtml = (html: string): string => {
 
 // Prettify code using Prettier
 export const formatCode = async (code: string, language: string) => {
-  console.log('formatCode', code, language);
   const formattedCode = await prettier.format(code, {
-    parser: language === 'mdx' ? 'mdx' : 'babel', // Use MDX parser for MDX content or Babel for JS/React
-    // plugins: [prettierMdxPlugin], // Ensure Prettier supports MDX formatting
+    parser: language === "jsx" ? "babel" : "typescript",
+    plugins: [tsParser],
+    "arrowParens": "always",
+    "bracketSameLine": false,
+    "bracketSpacing": false,
+    "semi": true,
+    "experimentalTernaries": false,
+    "singleQuote": false,
+    "jsxSingleQuote": true,
+    "quoteProps": "as-needed",
+    "trailingComma": "all",
+    "singleAttributePerLine": false,
+    "htmlWhitespaceSensitivity": "css",
+    "vueIndentScriptAndStyle": true,
+    "proseWrap": "always",
+    "insertPragma": false,
+    "requirePragma": false,
+    "tabWidth": 3,
+    "useTabs": true,
+    "embeddedLanguageFormatting": "auto",
+    "printWidth": 30
+
   });
   return formattedCode;
 };

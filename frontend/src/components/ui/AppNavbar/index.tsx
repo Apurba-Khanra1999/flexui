@@ -24,7 +24,7 @@ import { ThemeSwitcher } from "../ThemeSwitcher";
 
 const menuItems = [
   { name: "Home", href: "/" },
-  { name: "Elements", href: "/elements" },
+  { name: "UI Components", href: "/components" },
   { name: "About", href: "/about" },
 ];
 

@@ -18,15 +18,7 @@ export default function CodePreviewComponet({
   return (
     <Tabs aria-label="Tabs variants" variant="underlined" size="sm">
       <Tab title={<p className="text-sm font-medium capitalize">Preview</p>}>
-        <div className="p-4 border border-slate-700 rounded-md">
-
-            <ComponentPreview
-              code={jsxCode as string}
-              componentTitle="Preview"
-              refIframe={ref}
-            />
-        </div>
-          
+        <ComponentPreview code={jsxCode as string} componentTitle="Preview" />
       </Tab>
       {codeList?.map((codeItem, index) => (
         <Tab
@@ -37,14 +29,12 @@ export default function CodePreviewComponet({
             </p>
           }
         >
-          <div className="p-4 border border-slate-700 rounded-md">
-
-              <CodeBlock
-                code={codeItem?.code}
-                className={`language-${codeItem?.language}`}
-              />
+          <div>
+            <CodeBlock
+              children={codeItem?.code}
+              className={`language-${codeItem?.language}`}
+            />
           </div>
-            
         </Tab>
       ))}
     </Tabs>
