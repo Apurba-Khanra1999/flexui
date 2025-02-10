@@ -3,6 +3,8 @@ import prettier from 'prettier';
 import babelParser from "@babel/parser";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+// import { ModelOperations } from '@vscode/vscode-languagedetection';
+
 const tsParser = require("prettier/parser-typescript");
 
 export const stripHtml = (html: string): string => {
@@ -15,25 +17,9 @@ export const formatCode = async (code: string, language: string) => {
   const formattedCode = await prettier.format(code, {
     parser: language === "jsx" ? "babel" : "typescript",
     plugins: [tsParser],
-    "arrowParens": "always",
-    "bracketSameLine": false,
-    "bracketSpacing": false,
+
     "semi": true,
-    "experimentalTernaries": false,
-    "singleQuote": false,
-    "jsxSingleQuote": true,
-    "quoteProps": "as-needed",
-    "trailingComma": "all",
-    "singleAttributePerLine": false,
-    "htmlWhitespaceSensitivity": "css",
-    "vueIndentScriptAndStyle": true,
-    "proseWrap": "always",
-    "insertPragma": false,
-    "requirePragma": false,
-    "tabWidth": 3,
-    "useTabs": true,
-    "embeddedLanguageFormatting": "auto",
-    "printWidth": 30
+   
 
   });
   return formattedCode;

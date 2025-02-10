@@ -3,7 +3,7 @@ import React from "react";
 
 export const Footer = () => {
   return (
-    <div className="w-full px-6 py-4 shadow-lg shadow-black bg-base">
+    <div className="w-full px-6 py-4 border-t bg-base shadow-sm">
       <div className="max-w-screen-xl mx-auto">
         <div className="max-w-[450px]">
           <h3 className="text-3xl font-bold py-2">FlexUI.</h3>

@@ -39,7 +39,6 @@ export type UserAccountType = {
 
 export type ComponetPreviewType = {
     showPreview?: boolean;
-    code: string;
     componentTitle: string;
     previewWidth?: string | number | undefined;
     previewHeight?: string | number | undefined;

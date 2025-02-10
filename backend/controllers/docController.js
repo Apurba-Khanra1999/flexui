@@ -50,56 +50,6 @@ const getDocById = async (req, res, next) => {
 };
 
 /**
- * GET /api/docs/slug/:uniqueSlug
- * Retrieve a single doc by its uniqueSlug.
- * Returns the full document (including its codes and variants).
- */
-const getDocByUniqueSlug = async (req, res, next) => {
-  try {
-    const { uniqueSlug } = req.params;
-
-    const doc = await Doc.findOne({
-      where: { uniqueSlug },
-      include: [
-        { model: Code, as: "codes" },
-        {
-          model: Doc,
-          as: "uiVariants",
-          include: [{ model: Code, as: "codes" }],
-        },
-      ],
-    });
-
-    if (!doc) {
-      return res.status(404).json({ message: "Doc not found" });
-    }
-
-    res.json(doc);
-  } catch (error) {
-    next(error);
-  }
-};
-
-/**
- * GET /api/docs/unique-slugs
- * Retrieve a list of docs with only the uiName and uniqueSlug fields.
- * You can adjust the query to include only main docs if needed.
- */
-const getUniqueSlugs = async (req, res, next) => {
-  try {
-    // If you want only main docs (not variants), you might filter with where: { parentId: null }
-    const docs = await Doc.findAll({
-      where: { parentId: null },
-      attributes: ["id", "uiName", "uniqueSlug"],
-    });
-
-    res.json(docs);
-  } catch (error) {
-    next(error);
-  }
-};
-
-/**
  * POST /api/docs
  * Create a new main doc.
  *
@@ -237,6 +187,77 @@ const createVariant = async (req, res, next) => {
     next(error);
   }
 };
+/**
+ * GET /api/docs/slug/:uniqueSlug
+ * Retrieve a single doc by its uniqueSlug.
+ * Returns the full document (including its codes and variants).
+ */
+const getDocByUniqueSlug = async (req, res, next) => {
+  try {
+    const { uniqueSlug } = req.params;
+
+    const doc = await Doc.findOne({
+      where: { uniqueSlug },
+      include: [
+        { model: Code, as: "codes" },
+        {
+          model: Doc,
+          as: "uiVariants",
+          include: [{ model: Code, as: "codes" }],
+        },
+      ],
+    });
+
+    if (!doc) {
+      return res.status(404).json({ message: "Doc not found" });
+    }
+
+    res.json(doc);
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * GET /api/docs/unique-slugs
+ * Retrieve a list of docs with only the uiName and uniqueSlug fields.
+ * You can adjust the query to include only main docs if needed.
+ */
+const getUniqueSlugs = async (req, res, next) => {
+  try {
+    // If you want only main docs (not variants), you might filter with where: { parentId: null }
+    const docs = await Doc.findAll({
+      where: { parentId: null },
+      attributes: ["id", "uiName", "uniqueSlug"],
+    });
+
+    res.json(docs);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getUniqueSlugsWithCode = async (req, res, next) => {
+  try {
+    const docs = await Doc.findAll({
+      where: { parentId: null },
+      attributes: ["id", "uiName", "uniqueSlug"],
+      include: [
+        {
+          model: Code,
+          as: "codes",
+          attributes: ["id", "language", "code"],
+          where: { language: "tailwind" },
+          required: false, // ensures that docs without any tailwind code are still returned
+        },
+      ],
+    });
+
+    res.json(docs);
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = {
   getDocs,
@@ -247,4 +268,5 @@ module.exports = {
   createVariant,
   getDocByUniqueSlug,
   getUniqueSlugs,
+  getUniqueSlugsWithCode,
 };

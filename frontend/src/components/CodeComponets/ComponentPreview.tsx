@@ -1,11 +1,11 @@
-import { extractHTMLFromJSX } from "@/utils";
 import { componentBreakpointsData } from "@/utils/data/ComponentBreakpointsData";
+import { useIframeRenderer } from "@/utils/hooks/useIframeRenderer";
 import { ComponentBreakpointsType } from "@/utils/Types";
 import { Divider } from "@heroui/react";
-import { useEffect, useRef, useState } from "react";
-import ComponetBreakpoints from "./ComponetBreakpoints";
-import ComponetPreviewIframe from "./ComponetPreviewIframe";
+import { useState } from "react";
 import CopyButton from "../ui/CopyButton";
+import ComponentPreviewIframe from "./ComponentPreviewIframe";
+import ComponetBreakpoints from "./ComponetBreakpoints";
 
 export default function ComponentPreview({
   code,
@@ -14,31 +14,9 @@ export default function ComponentPreview({
   code: string;
   componentTitle: string;
 }) {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
   const [componentBreakpoint, setComponetBreakpoint] =
     useState<ComponentBreakpointsType>({ name: "full", width: "100%" });
-
-  console.log(componentBreakpoint);
-  useEffect(() => {
-    const htmlCode = extractHTMLFromJSX(code);
-    if (iframeRef.current) {
-      const iframeDocument =
-        iframeRef?.current?.contentDocument ||
-        iframeRef?.current?.contentWindow?.document;
-
-      if (iframeDocument && iframeDocument.body) {
-        // ✅ Ensure iframeDocument and body exist
-        // Inject Tailwind CSS dynamically
-        const link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = "/globals.css"; // Ensure this file exists
-        iframeDocument.head.appendChild(link);
-
-        // Inject component HTML safely
-        iframeDocument.body.innerHTML = `<div class="p-4 w-full flex  justify-center">${htmlCode}</div>`;
-      }
-    }
-  }, [code]);
+  const iframeRef = useIframeRenderer(code);
   return (
     <div
       className="border border-slate-700 rounded-md"
@@ -63,8 +41,7 @@ export default function ComponentPreview({
       </div>
       <Divider />
       <div className="p-4">
-        <ComponetPreviewIframe
-          code={code}
+        <ComponentPreviewIframe
           componentTitle={componentTitle}
           iframeRef={iframeRef}
           previewWidth={componentBreakpoint.width}

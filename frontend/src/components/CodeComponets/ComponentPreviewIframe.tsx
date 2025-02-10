@@ -1,8 +1,7 @@
 import { ComponetPreviewType } from "@/utils/Types";
 import React from "react";
 
-export default function ComponetPreviewIframe({
-  code,
+export default function ComponentPreviewIframe({
   componentTitle,
   previewWidth = "100%",
   previewHeight = "h-auto",

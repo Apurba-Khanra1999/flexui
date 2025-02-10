@@ -13,7 +13,7 @@ export default function CodePreviewComponet({
 }) {
   const ref = useRef(null);
   const jsxCode = codeList.find(
-    (codeItem) => codeItem?.language === "jsx"
+    (codeItem) => codeItem?.language === "tailwind"
   )?.code;
   return (
     <Tabs aria-label="Tabs variants" variant="underlined" size="sm">

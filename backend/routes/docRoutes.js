@@ -10,6 +10,7 @@ const {
   createVariant,
   getDocByUniqueSlug,
   getUniqueSlugs,
+  getUniqueSlugsWithCode,
 } = require("../controllers/docController");
 
 // Main docs routes
@@ -23,6 +24,7 @@ router.get("/getDocByUniqueSlug/:uniqueSlug", getDocByUniqueSlug);
 
 // Retrieve all docs with uiName and uniqueSlug fields
 router.get("/getUniqueSlugs/get-docs-list", getUniqueSlugs);
+router.get("/getUniqueSlugs/get-docs-list-with-code", getUniqueSlugsWithCode);
 // Route for creating a variant for an existing doc
 router.post("/createVariant/:id", createVariant);
 
