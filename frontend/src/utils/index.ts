@@ -1,11 +1,14 @@
-import * as babel from "@babel/parser";
-import prettier from 'prettier';
-import babelParser from "@babel/parser";
+import * as babelParser from "prettier/parser-babel";
+import * as flowParser from "prettier/parser-flow";
+import * as htmlParser from "prettier/parser-html";
+import * as tsParser from "prettier/parser-typescript";
+import * as prettierPluginESTree from "prettier/plugins/estree";
+import * as prettier from 'prettier/standalone';
+
+import babel from "@babel/parser";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-// import { ModelOperations } from '@vscode/vscode-languagedetection';
 
-const tsParser = require("prettier/parser-typescript");
 
 export const stripHtml = (html: string): string => {
   return html.replace(/<[^>]*>/g, "").trim(); // Remove all HTML tags
@@ -15,11 +18,11 @@ export const stripHtml = (html: string): string => {
 // Prettify code using Prettier
 export const formatCode = async (code: string, language: string) => {
   const formattedCode = await prettier.format(code, {
-    parser: language === "jsx" ? "babel" : "typescript",
-    plugins: [tsParser],
+    parser: language === "jsx" ? "babel" : "babel-flow",
+    plugins: [tsParser, babelParser.default, htmlParser.default, flowParser.default, prettierPluginESTree.default],
 
     "semi": true,
-   
+
 
   });
   return formattedCode;
