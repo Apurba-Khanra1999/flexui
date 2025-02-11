@@ -11,12 +11,19 @@ export const ComponentWithPreviewShowcase = ({
       {/* Masonry Grid */}
       <div className="pb-6">
         <h1 className="font-bold text-3xl">All Components</h1>
-        <p className="py-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, minima.</p>
+        <p className="py-4">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Necessitatibus, minima.
+        </p>
       </div>
       <div className="grid-cols-auto-fill columns-1 sm:columns-2 md:columns-3 lg:columns-3 2xl:columns-4 gap-4 space-y-4">
-        {data.map((item, i) => (
-          <ComponentWithCodeItem key={i} previewData={item} />
-        ))}
+        {data && data?.length > 0 ? (
+          data?.map((item, i) => (
+            <ComponentWithCodeItem key={i} previewData={item} />
+          ))
+        ) : (
+          <h2 className="font-bold text-lg">Components Empty.</h2>
+        )}
       </div>
     </div>
   );

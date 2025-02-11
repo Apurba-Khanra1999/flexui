@@ -8,7 +8,8 @@ import { ComponentWithPreviewShowcase } from "./ComponentsWithPreviewShowcase";
 export const ComponentsPage = () => {
   const { data, isLoading } = useQuery({
     queryKey: [GET_DOCS_LIST_WITH_CODE],
-    queryFn: async () => request({ url: GET_DOCS_LIST_WITH_CODE }),
+    queryFn: async () =>
+      request({ url: GET_DOCS_LIST_WITH_CODE, method: "GET" }),
   });
   if (isLoading) return <Loader />;
   return (
