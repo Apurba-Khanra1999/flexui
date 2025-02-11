@@ -1,16 +1,27 @@
-// config/database.js
 const { Sequelize } = require("sequelize");
-const config = require("./config.js").development;
+const config = require("./config.js");
 
-const sequelize = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
-  {
-    host: config.host,
-    dialect: config.dialect,
-    logging: false, // Set to console.log to enable query logging
-  }
-);
+let sequelize; // Store connection globally to prevent multiple instances
+
+if (process.env.NODE_ENV === "production") {
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: "postgres",
+    logging: false,
+    dialectOptions: {
+      ssl: { require: true, rejectUnauthorized: false }, // ✅ Needed for most cloud-hosted DBs
+    },
+  });
+} else {
+  sequelize = new Sequelize(
+    config.development.database,
+    config.development.username,
+    config.development.password,
+    {
+      host: config.development.host,
+      dialect: config.development.dialect,
+      logging: false,
+    }
+  );
+}
 
 module.exports = sequelize;
