@@ -13,7 +13,7 @@ export const ComponentWithPreviewShowcase = ({
         <h1 className="font-bold text-3xl">All Components</h1>
         <p className="py-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, minima.</p>
       </div>
-      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 2xl:columns-4 gap-4 space-y-4">
+      <div className="grid-cols-auto-fill columns-1 sm:columns-2 md:columns-3 lg:columns-3 2xl:columns-4 gap-4 space-y-4">
         {data.map((item, i) => (
           <ComponentWithCodeItem key={i} previewData={item} />
         ))}

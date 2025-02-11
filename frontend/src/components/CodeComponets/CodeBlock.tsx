@@ -17,7 +17,7 @@ export const CodeBlock = ({ className = "", children }: CodeBlockProps) => {
     );
   }, [children, language]);
   return (
-    <div className="my-4 relative w-fit">
+    <div className="my-4 relative w-fit max-h-[400px] overflow-y-auto">
       <CopyButton value={formattedCode} className="absolute top-2 right-2" />
       <SyntaxHighlighter
         customStyle={{ borderRadius: "8px", padding: "20px" ,fontSize:"0.9rem" }}

@@ -1,11 +1,11 @@
 import CodePreviewComponet from "@/components/CodeComponets/CodePreviewComponet";
 import MDXComponent from "@/components/MDXComponent";
+import { Loader } from "@/components/ui/Loader";
 import request from "@/utils/AxiosUtils";
 import { GET_ELEMENT_DETAILS } from "@/utils/AxiosUtils/api";
 import "highlight.js/styles/night-owl.css";
-import ElementComponent from "./ElementComponent";
 import { Suspense } from "react";
-import { Loader } from "@/components/ui/Loader";
+import ElementComponent from "./ElementComponent";
 
 // interface FrontMatter {
 //   title: string;
@@ -51,10 +51,7 @@ export default async function ComponentPage({
             <p className="text-md font-semibold my-2">{data?.uiSubtitle}</p>
           </div>
           <div>
-            <CodePreviewComponet
-              codeList={data?.codes}
-              elementTitle={data?.uiName}
-            />
+            <CodePreviewComponet codeList={data?.codes} />
           </div>
 
           <div>

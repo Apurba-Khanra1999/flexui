@@ -1,12 +1,11 @@
 "use client";
 
-import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { SidebarParentItemType } from "@/utils/Types";
+import { usePathname } from "next/navigation";
 import { Suspense } from "react";
 import { Loader } from "../Loader";
-import SidebarParentItem from "./SiderbarParentItem";
 import SidebarItem from "./SidebarItem";
-import { SidebarParentItemType } from "@/utils/Types";
+import SidebarParentItem from "./SiderbarParentItem";
 
 export function ComponentsSidebar({ data }: { data: SidebarParentItemType[] }) {
   // console.log(data);

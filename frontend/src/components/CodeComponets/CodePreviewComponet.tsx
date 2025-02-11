@@ -1,17 +1,13 @@
 "use client";
-import { Card, CardBody, CardHeader, Tab, Tabs } from "@heroui/react";
-import { useRef } from "react";
+import { Tab, Tabs } from "@heroui/react";
 import { CodeBlock } from "./CodeBlock";
 import ComponentPreview from "./ComponentPreview";
 
 export default function CodePreviewComponet({
   codeList,
-  elementTitle,
 }: {
   codeList: Record<string, string>[];
-  elementTitle: string;
 }) {
-  const ref = useRef(null);
   const jsxCode = codeList.find(
     (codeItem) => codeItem?.language === "tailwind"
   )?.code;
@@ -30,10 +26,9 @@ export default function CodePreviewComponet({
           }
         >
           <div>
-            <CodeBlock
-              children={codeItem?.code}
-              className={`language-${codeItem?.language}`}
-            />
+            <CodeBlock className={`language-${codeItem?.language}`}>
+              {codeItem?.code}
+            </CodeBlock>
           </div>
         </Tab>
       ))}

@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { useState } from "react";
-import SidebarItem from "./SidebarItem";
 import { SidebarParentItemType } from "@/utils/Types";
+import { useState } from "react";
+import { FiArrowDown, FiArrowRight } from "react-icons/fi";
+import SidebarItem from "./SidebarItem";
 
 const SidebarParentItem = ({
   item,
@@ -21,7 +21,11 @@ const SidebarParentItem = ({
         onClick={() => hasChildren && setIsOpen(!isOpen)}
       >
         <h2 className="capitalize">{item.category.categoryName}</h2>
-        {hasChildren && <span className="text-xs">{isOpen ? "▼" : "▶"}</span>}
+        {hasChildren && (
+          <span className="text-xs">
+            {isOpen ? <FiArrowDown size={16} /> : <FiArrowRight size={16} />}
+          </span>
+        )}
       </div>
 
       {/* Child Items */}
