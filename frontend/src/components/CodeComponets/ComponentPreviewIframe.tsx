@@ -16,6 +16,7 @@ export default function ComponentPreviewIframe({
         style={{ maxWidth: previewWidth }}
         title={`${componentTitle} Component`}
         ref={iframeRef}
+        sandbox="allow-scripts allow-same-origin allow-popups"
       ></iframe>
     </div>
   );

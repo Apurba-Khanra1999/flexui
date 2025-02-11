@@ -45,6 +45,7 @@ export default function ComponentPreview({
           componentTitle={componentTitle}
           iframeRef={iframeRef}
           previewWidth={componentBreakpoint.width}
+          previewHeight="h-[400px] xl:h-[400px]"
         />
       </div>
     </div>

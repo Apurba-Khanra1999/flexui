@@ -49,3 +49,10 @@ export type ComponentBreakpointsType = {
     name: string;
     width: string;
 }
+
+export type SidebarParentItemType = {
+    category: { id: string; categoryName: string; slug: string };
+    children?: { uiName: string; uniqueSlug: string; categoryId: string }[];
+
+
+}

@@ -4,16 +4,15 @@ import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { Suspense } from "react";
 import { Loader } from "../Loader";
+import SidebarParentItem from "./SiderbarParentItem";
+import SidebarItem from "./SidebarItem";
+import { SidebarParentItemType } from "@/utils/Types";
 
-export function ComponentsSidebar({
-  data,
-}: {
-  data: Record<string, unknown>[];
-}) {
+export function ComponentsSidebar({ data }: { data: SidebarParentItemType[] }) {
   // console.log(data);
   const pathname = usePathname();
   const path = pathname.split("/").pop();
-  console.log(path)
+
   return (
     <aside className="border-grid fixed top-14 z-30 hidden h-[calc(100vh-3.5rem)] w-48 shrink-0 border-r md:sticky md:block">
       <Suspense fallback={<Loader />}>
@@ -30,12 +29,7 @@ export function ComponentsSidebar({
                   pathname={path}
                 />
                 {data.map((item, index) => (
-                  <SidebarItem
-                    key={index}
-                    pathname={path}
-                    uniqueSlug={item?.uniqueSlug as string}
-                    uiName={item?.uiName as string}
-                  />
+                  <SidebarParentItem item={item} pathname={path} key={index} />
                 ))}
               </div>
             </div>
@@ -45,26 +39,3 @@ export function ComponentsSidebar({
     </aside>
   );
 }
-
-const SidebarItem = ({
-  pathname,
-  uniqueSlug,
-  uiName,
-}: {
-  pathname: string | undefined;
-  uniqueSlug: string;
-  uiName: string;
-}) => {
-  return (
-    <Link
-      className={`group flex h-8 w-full items-center rounded-lg px-2 font-normal text-foreground underline-offset-2 hover:bg-zinc-300 dark:hover:bg-zinc-800 hover:text-accent-foreground ${pathname === uniqueSlug && "bg-zinc-300 dark:bg-zinc-800"} `}
-      href={
-        uniqueSlug === "components"
-          ? "/components"
-          : `/components/${uniqueSlug}`
-      }
-    >
-      <span>{uiName}</span>
-    </Link>
-  );
-};
