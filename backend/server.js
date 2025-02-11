@@ -14,12 +14,16 @@ app.use(express.json()); // For parsing JSON bodies
 // Routes
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/docs", require("./routes/docRoutes"));
-app.use('/api/categories', require('./routes/categoryRoutes'));
+app.use("/api/categories", require("./routes/categoryRoutes"));
 
 // Global error handling middleware (optional)
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: "Something went wrong!" });
+});
+
+app.get("/", async (req, res) => {
+  return res.status(200).json({ message: "server started" });
 });
 
 // Start the server and connect to the database
