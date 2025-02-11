@@ -1,12 +1,12 @@
 import ComponentPage from "@/components/Pages/ComponentPage";
 
 interface PageProps {
-  params: { component: string };
+  params: Promise<{ component: string }>;
 }
 
 async function Component({ params }: PageProps) {
-  const { component } = await params;
-  return <ComponentPage component={component as string} />;
+  const component = (await params).component;
+  return <ComponentPage component={component} />;
 }
 
 export default Component;

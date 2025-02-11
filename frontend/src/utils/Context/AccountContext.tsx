@@ -17,11 +17,11 @@ export const AccountContext = createContext<{
 });
 
 const AccountProvider = ({ children }: { children: React.ReactNode }) => {
-  const [accountData, setAccountData] = useState<UserAccountType>(() => {
-    const storedAccount = localStorage.getItem("account");
-    return storedAccount
-      ? JSON.parse(storedAccount)
-      : { username: "", profilePic: "", email: "", id: "" };
+  const [accountData, setAccountData] = useState<UserAccountType>({
+    username: "",
+    profilePic: "",
+    email: "",
+    id: "",
   });
 
   useEffect(() => {

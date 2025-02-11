@@ -5,7 +5,7 @@ import * as tsParser from "prettier/parser-typescript";
 import * as prettierPluginESTree from "prettier/plugins/estree";
 import * as prettier from 'prettier/standalone';
 
-import babel from "@babel/parser";
+import * as  babel from "@babel/parser";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 

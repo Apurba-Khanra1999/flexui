@@ -19,7 +19,6 @@ export default function ElementComponent({
           <div>
             <CodePreviewComponet
               codeList={data?.codes as Record<string, string>[]}
-              elementTitle={data?.uiName as string}
             />
           </div>
 

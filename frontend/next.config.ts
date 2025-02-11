@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   //   destination: "/components/button",
   //   permanent: true, // Set to false for temporary redirect (302)
   // }],
+  // eslint: {
+  //   ignoreDuringBuilds: true, // ✅ Disables ESLint in "next build"
+  // },
 
   images: {
     remotePatterns: [
