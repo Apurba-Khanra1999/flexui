@@ -37,6 +37,10 @@ const Doc = sequelize.define(
       // Optionally, you can add a comment here:
       // Example: "button" for a Button component
     },
+    categoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   },
   {
     timestamps: true,
@@ -44,9 +48,17 @@ const Doc = sequelize.define(
 );
 
 // Before validating a Doc instance, automatically generate a uniqueSlug if not provided.
-Doc.beforeValidate((doc, options) => {
+Doc.beforeValidate(async (doc, options) => {
   if (!doc.uniqueSlug && doc.uiName) {
     doc.uniqueSlug = generateSlug(doc.uiName);
+  }
+  const existing = await Doc.findOne({
+    where: { uniqueSlug: doc.uniqueSlug },
+  });
+  if (existing && existing.id !== doc.id) {
+    const error = new Error("UniqueSlug already exists");
+    error.status = 404; // As requested, we use 404 even though 409 may be more appropriate.
+    throw error;
   }
 });
 

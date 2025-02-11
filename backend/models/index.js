@@ -1,5 +1,6 @@
 // models/index.js
 const sequelize = require("../config/database");
+const Category = require("./Categories");
 const Code = require("./Codes");
 const Doc = require("./Doc");
 const User = require("./User");
@@ -18,9 +19,14 @@ Doc.hasMany(Doc, {
 // Each variant belongs to a parent doc.
 Doc.belongsTo(Doc, { foreignKey: "parentId", as: "parentDoc" });
 
+// Association between Doc and Category
+Doc.belongsTo(Category, { foreignKey: "categoryId", as: "category" });
+Category.hasMany(Doc, { foreignKey: "categoryId", as: "docs" });
+
 module.exports = {
   sequelize,
   User,
   Doc,
   Code,
+  Category,
 };

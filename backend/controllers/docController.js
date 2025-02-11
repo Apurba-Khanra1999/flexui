@@ -1,5 +1,5 @@
 // controllers/docController.js
-const { Doc, Code } = require("../models");
+const { Doc, Code, Category } = require("../models");
 
 /**
  * GET /api/docs
@@ -11,6 +11,11 @@ const getDocs = async (req, res, next) => {
       where: { parentId: null },
       include: [
         { model: Code, as: "codes" },
+        {
+          model: Category,
+          as: "category",
+          attributes: ["categoryName", "slug"],
+        },
         {
           model: Doc,
           as: "uiVariants",
@@ -36,6 +41,11 @@ const getDocById = async (req, res, next) => {
       include: [
         { model: Code, as: "codes" },
         {
+          model: Category,
+          as: "category",
+          attributes: ["categoryName", "slug"],
+        },
+        {
           model: Doc,
           as: "uiVariants",
           include: [{ model: Code, as: "codes" }],
@@ -58,16 +68,18 @@ const getDocById = async (req, res, next) => {
  *   "uiName": "Button",
  *   "uiSubtitle": "Primary Button",
  *   "docs": "# Button Documentation...",
+ *   "uniqueSlug": "buttons/primary", // Optional: auto-generated if not provided
+ *   "categoryId": 1,                // The id of the associated category
  *   "codes": [
  *     { "language": "jsx", "code": "function Button() { ... }" },
  *     { "language": "css", "code": ".button { ... }" }
  *   ],
- *   "parentId": null  // for main doc (optional)
+ *   "parentId": null                // for main doc (optional)
  * }
  */
 const createDoc = async (req, res, next) => {
   try {
-    const { uiName, uiSubtitle, docs, codes, parentId } = req.body;
+    const { uiName, uiSubtitle, docs, codes, parentId, categoryId } = req.body;
 
     // Create the main doc (or variant if parentId is not null)
     const newDoc = await Doc.create({
@@ -75,6 +87,7 @@ const createDoc = async (req, res, next) => {
       uiSubtitle,
       docs,
       parentId: parentId || null,
+      categoryId,
     });
 
     // Create associated code snippets, if provided
@@ -90,7 +103,14 @@ const createDoc = async (req, res, next) => {
 
     // Fetch the created doc along with its codes
     const createdDoc = await Doc.findByPk(newDoc.id, {
-      include: [{ model: Code, as: "codes" }],
+      include: [
+        { model: Code, as: "codes" },
+        {
+          model: Category,
+          as: "category",
+          attributes: ["categoryName", "slug"],
+        },
+      ],
     });
 
     res.status(201).json(createdDoc);
@@ -106,11 +126,11 @@ const createDoc = async (req, res, next) => {
 const updateDoc = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { uiName, uiSubtitle, docs } = req.body;
+    const { uiName, uiSubtitle, docs, categoryId } = req.body;
     const doc = await Doc.findByPk(id);
     if (!doc) return res.status(404).json({ message: "Doc not found" });
 
-    await doc.update({ uiName, uiSubtitle, docs });
+    await doc.update({ uiName, uiSubtitle, docs, categoryId });
     res.json(doc);
   } catch (error) {
     next(error);
@@ -151,7 +171,7 @@ const deleteDoc = async (req, res, next) => {
 const createVariant = async (req, res, next) => {
   try {
     const parentId = req.params.id;
-    const { uiName, uiSubtitle, docs, codes } = req.body;
+    const { uiName, uiSubtitle, docs, codes, categoryId } = req.body;
 
     // Ensure parent doc exists
     const parentDoc = await Doc.findByPk(parentId);
@@ -164,6 +184,7 @@ const createVariant = async (req, res, next) => {
       uiSubtitle,
       docs,
       parentId,
+      categoryId,
     });
 
     // Create associated codes for the variant
@@ -179,7 +200,14 @@ const createVariant = async (req, res, next) => {
 
     // Fetch the newly created variant with its codes
     const createdVariant = await Doc.findByPk(variant.id, {
-      include: [{ model: Code, as: "codes" }],
+      include: [
+        { model: Code, as: "codes" },
+        {
+          model: Category,
+          as: "category",
+          attributes: ["categoryName", "slug"],
+        },
+      ],
     });
 
     res.status(201).json(createdVariant);
@@ -200,6 +228,11 @@ const getDocByUniqueSlug = async (req, res, next) => {
       where: { uniqueSlug },
       include: [
         { model: Code, as: "codes" },
+        {
+          model: Category,
+          as: "category",
+          attributes: ["categoryName", "slug"],
+        },
         {
           model: Doc,
           as: "uiVariants",
@@ -223,15 +256,55 @@ const getDocByUniqueSlug = async (req, res, next) => {
  * Retrieve a list of docs with only the uiName and uniqueSlug fields.
  * You can adjust the query to include only main docs if needed.
  */
-const getUniqueSlugs = async (req, res, next) => {
+const getUniqueSlugsGrouped = async (req, res, next) => {
   try {
-    // If you want only main docs (not variants), you might filter with where: { parentId: null }
     const docs = await Doc.findAll({
       where: { parentId: null },
-      attributes: ["id", "uiName", "uniqueSlug"],
+      attributes: ["id", "uiName", "uniqueSlug", "categoryId"],
+      include: [
+        {
+          model: Category,
+          as: "category",
+          attributes: ["id", "categoryName", "slug"],
+        },
+      ],
+      // Order by the associated category's name (you can adjust ordering as needed)
+      order: [[{ model: Category, as: "category" }, "categoryName", "ASC"]],
     });
 
-    res.json(docs);
+    // Group docs by category (using the category id)
+    const grouped = docs.reduce((acc, doc) => {
+      // Convert Sequelize instance to plain object
+      const docObj = doc.toJSON();
+
+      // If a doc has no associated category, use a default "Uncategorized" group.
+      const cat = docObj.category || {
+        id: "0",
+        categoryName: "Uncategorized",
+        slug: "uncategorized",
+      };
+
+      // Initialize the group if not already created
+      if (!acc[cat.id]) {
+        acc[cat.id] = {
+          category: cat,
+          children: [],
+        };
+      }
+
+      // Push the document into the children array for this category.
+      acc[cat.id].children.push({
+        id: docObj.id,
+        uiName: docObj.uiName,
+        uniqueSlug: docObj.uniqueSlug,
+        categoryId: docObj.categoryId,
+      });
+      return acc;
+    }, {});
+
+    // Convert the grouped object into an array
+    const result = Object.values(grouped);
+    res.json(result);
   } catch (error) {
     next(error);
   }
@@ -241,8 +314,13 @@ const getUniqueSlugsWithCode = async (req, res, next) => {
   try {
     const docs = await Doc.findAll({
       where: { parentId: null },
-      attributes: ["id", "uiName", "uniqueSlug"],
+      attributes: ["id", "uiName", "uniqueSlug", "categoryId"],
       include: [
+        {
+          model: Category,
+          as: "category",
+          attributes: ["id", "categoryName", "slug"],
+        },
         {
           model: Code,
           as: "codes",
@@ -251,6 +329,7 @@ const getUniqueSlugsWithCode = async (req, res, next) => {
           required: false, // ensures that docs without any tailwind code are still returned
         },
       ],
+      order: [["categoryId", "ASC"]],
     });
 
     res.json(docs);
@@ -267,6 +346,6 @@ module.exports = {
   deleteDoc,
   createVariant,
   getDocByUniqueSlug,
-  getUniqueSlugs,
+  getUniqueSlugsGrouped,
   getUniqueSlugsWithCode,
 };

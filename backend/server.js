@@ -14,6 +14,7 @@ app.use(express.json()); // For parsing JSON bodies
 // Routes
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/docs", require("./routes/docRoutes"));
+app.use('/api/categories', require('./routes/categoryRoutes'));
 
 // Global error handling middleware (optional)
 app.use((err, req, res, next) => {
