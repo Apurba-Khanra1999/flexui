@@ -5,7 +5,7 @@
   "scripts": {
     "css": "npx @tailwindcss/cli -i ./src/app/globals.css -o ./public/globals.css",
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "npm run css && next build",
     "start": "next start",
     "lint": "next lint",
     "build:production": "next build && css"
