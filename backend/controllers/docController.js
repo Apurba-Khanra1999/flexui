@@ -312,8 +312,19 @@ const getUniqueSlugsGrouped = async (req, res, next) => {
 
 const getUniqueSlugsWithCode = async (req, res, next) => {
   try {
+    // Get categoryId from the query string (e.g., /api/docs/unique-slugs-with-code?categoryId=30)
+    const { categoryId } = req.query;
+
+    // Set the base condition to only return main docs (parentId is null)
+    const condition = { parentId: null };
+
+    // If a categoryId is provided, add it to the condition
+    if (categoryId) {
+      condition.categoryId = categoryId;
+    }
+
     const docs = await Doc.findAll({
-      where: { parentId: null },
+      where: condition,
       attributes: ["id", "uiName", "uniqueSlug", "categoryId"],
       include: [
         {
@@ -326,7 +337,7 @@ const getUniqueSlugsWithCode = async (req, res, next) => {
           as: "codes",
           attributes: ["id", "language", "code"],
           where: { language: "tailwind" },
-          required: false, // ensures that docs without any tailwind code are still returned
+          required: false, // returns docs even if no tailwind code exists
         },
       ],
       order: [["categoryId", "ASC"]],
