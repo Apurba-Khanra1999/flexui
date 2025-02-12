@@ -44,7 +44,7 @@ export default async function ComponentPage({
   });
   return (
     <Suspense fallback={<Loader />}>
-      <div>
+      <div className="my-4">
         <div>
           <div>
             <h1 className="font-bold text-4xl">{data?.uiName}</h1>

@@ -8,13 +8,16 @@ export default function CodePreviewComponet({
 }: {
   codeList: Record<string, string>[];
 }) {
-  const jsxCode = codeList.find(
+  const tailwindCode = codeList.find(
     (codeItem) => codeItem?.language === "tailwind"
   )?.code;
   return (
     <Tabs aria-label="Tabs variants" variant="underlined" size="sm">
       <Tab title={<p className="text-sm font-medium capitalize">Preview</p>}>
-        <ComponentPreview code={jsxCode as string} componentTitle="Preview" />
+        <ComponentPreview
+          code={tailwindCode as string}
+          componentTitle="Preview"
+        />
       </Tab>
       {codeList?.map((codeItem, index) => (
         <Tab

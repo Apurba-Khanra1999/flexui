@@ -1,3 +1,4 @@
+"use client"
 import { ComponentsPage } from '@/components/Pages/ComponentsPage'
 import React from 'react'
 

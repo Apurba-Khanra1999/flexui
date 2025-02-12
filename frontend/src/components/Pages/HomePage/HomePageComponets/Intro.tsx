@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@heroui/react";
+import Link from "next/link";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
 export const Intro = () => {
@@ -9,9 +10,7 @@ export const Intro = () => {
         <h1 className="order-last text-lg  font-semibold">
           Free Open Source Tailwind CSS Components
         </h1>
-        <h2 className="text-6xl font-bold xl:text-9xl">
-          FlexUI.
-        </h2>
+        <h2 className="text-6xl font-bold xl:text-9xl">FlexUI.</h2>
       </div>
       <div className="mx-auto lg:mx-0 mt-6 max-w-xl space-y-6">
         <p className="text-base/relaxed text-pretty lg:max-w-80">
@@ -20,13 +19,15 @@ export const Intro = () => {
           eveniet adipisci tenetur saepe quo.
         </p>
         <div>
-          <Button
-            color="primary"
-            variant="shadow"
-            endContent={<FaLongArrowAltRight />}
-          >
-            Get Stated
-          </Button>
+          <Link href="/components">
+            <Button
+              color="primary"
+              variant="shadow"
+              endContent={<FaLongArrowAltRight />}
+            >
+              Get Stated
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="mt-4">

@@ -64,5 +64,40 @@ export const extractHTMLFromJSX = (code: string) => {
   }
 };
 
+export function componentPreviewJsx(componentHtml: string) {
+  return componentHtml
+    .replace(/class=/g, 'className=')
+    .replace(/for=/g, 'htmlFor=')
+    .replace(/viewBox=/g, 'viewBox=')
+    .replace(/fill-rule=/g, 'fillRule=')
+    .replace(/fill-opacity=/g, 'fillOpacity=')
+    .replace(/clip-rule=/g, 'clipRule=')
+    .replace(/stroke-linecap=/g, 'strokeLinecap=')
+    .replace(/stroke-linejoin=/g, 'strokeLinejoin=')
+    .replace(/stroke-width=/g, 'strokeWidth=')
+    .replace(/stroke-dasharray=/g, 'strokeDasharray=')
+    .replace(/stroke-dashoffset=/g, 'strokeDashoffset=')
+    .replace(/stroke-miterlimit=/g, 'strokeMiterlimit=')
+    .replace(/stroke-opacity=/g, 'strokeOpacity=')
+    .replace(/tabindex=/g, 'tabIndex=')
+    .replace(/<!--/g, '{/*')
+    .replace(/-->/g, '*/}')
+}
+
+export function componentPreviewVue(componentHtml: string) {
+  const newComponentHtml = `<template>\n${componentHtml}</template>`
+  const formattedComponentHtml = newComponentHtml
+    .split('\n')
+    .map((codeLine) => {
+      if (codeLine.includes('<template>') || codeLine.includes('</template>')) {
+        return codeLine.trim()
+      }
+
+      return `  ${codeLine}`
+    })
+    .join('\n')
+
+  return formattedComponentHtml
+}
 
 

@@ -16,7 +16,7 @@ const request = async ({ ...options }:
             console.error("Access forbidden (403)");
         }
         console.log("error axios-utils", error?.response);
-        return error;
+        throw error;
     }
 
     try {

@@ -9,7 +9,7 @@ export default function ElementComponent({
   return (
     <>
       {data && (
-        <div>
+        <div className="my-4">
           <div>
             <h1 className="font-bold text-4xl">{data?.uiName as string}</h1>
             <p className="text-md font-semibold my-2">
