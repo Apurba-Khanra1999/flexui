@@ -1,8 +1,12 @@
+"use client"
+
 import { UICollectionItem } from "@/components/UICollections/UICollectionItem";
 import { UICollectionsWrapper } from "@/components/UICollections/UICollectionsWrapper";
 import { DemoData } from "@/utils/data/DemoData";
 import { HeroSection } from "./HomePageComponets/HeroSection";
 import { MainFeatures } from "./HomePageComponets/MainFeatures";
+import WhyChooseUs from "./HomePageComponets/WhyChooseUs";
+import PricingSection from "./HomePageComponets/PricingSection";
 
 export const HomePage = () => {
   return (
@@ -11,6 +15,12 @@ export const HomePage = () => {
 
       <div>
         <MainFeatures />
+      </div>
+      <div>
+        <WhyChooseUs />
+      </div>
+      <div className="my-20">
+        <PricingSection />
       </div>
       <div className="my-12">
         <UICollectionsWrapper

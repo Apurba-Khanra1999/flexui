@@ -29,7 +29,7 @@ export default function ComponentsPreviewShowcase() {
             >
               <TabsList
                 defaultValue="1"
-                className="bg-slate-200 dark:bg-slate-700"
+                className="bg-slate-200 dark:bg-neutral-800"
               >
                 {categories &&
                   categories?.map((cat: Record<string, string>) => (

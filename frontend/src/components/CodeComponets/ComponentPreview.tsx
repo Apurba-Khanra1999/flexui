@@ -1,18 +1,23 @@
 import { componentBreakpointsData } from "@/utils/data/ComponentBreakpointsData";
 import { useIframeRenderer } from "@/utils/hooks/useIframeRenderer";
 import { ComponentBreakpointsType } from "@/utils/Types";
-import { Divider } from "@heroui/react";
+import { Chip, Divider } from "@heroui/react";
 import { useState } from "react";
 import CopyButton from "../ui/CopyButton";
 import ComponentPreviewIframe from "./ComponentPreviewIframe";
 import ComponetBreakpoints from "./ComponetBreakpoints";
+import Link from "next/link";
 
 export default function ComponentPreview({
   code,
   componentTitle,
+  uniqueSlug,
+  showVisit = false,
 }: {
   code: string;
   componentTitle: string;
+  uniqueSlug: string;
+  showVisit: boolean;
 }) {
   const [componentBreakpoint, setComponetBreakpoint] =
     useState<ComponentBreakpointsType>({ name: "full", width: "100%" });
@@ -35,7 +40,12 @@ export default function ComponentPreview({
             />
           ))}
         </div>
-        <div>
+        <div className="flex items-center gap-2">
+          {showVisit && (
+            <Link href={`/components/${uniqueSlug}`}>
+              <Chip size="sm">{"</> View Code"}</Chip>
+            </Link>
+          )}
           <CopyButton value={code} />
         </div>
       </div>

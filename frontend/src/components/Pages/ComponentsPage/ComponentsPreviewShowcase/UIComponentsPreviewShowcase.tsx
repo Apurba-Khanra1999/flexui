@@ -39,10 +39,9 @@ export const UIComponentsPreviewShowcase = ({
                   key={i}
                   code={item?.codes[0]?.code}
                   componentTitle={item?.uiName}
+                  uniqueSlug={item?.uniqueSlug}
+                  showVisit={true}
                 />
-                <Link href={`/components/${item?.uniqueSlug}`}>
-                  <Chip>{"</> View Code"}</Chip>
-                </Link>
               </>
             )
           )

@@ -1,6 +1,13 @@
 import ComponentPreviewIframe from "@/components/CodeComponets/ComponentPreviewIframe";
 import { useIframeRenderer } from "@/utils/hooks/useIframeRenderer";
-import { Card, CardBody, CardFooter, Chip, Divider } from "@heroui/react";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Chip,
+  Divider,
+} from "@heroui/react";
 import Link from "next/link";
 import React from "react";
 
@@ -15,20 +22,25 @@ export const ComponentWithCodeItem = ({
     useIframeRenderer(code);
   return (
     <div className="break-inside-avoid">
-      <Card isPressable shadow="sm" radius="sm" fullWidth  className="w-full h-full">
+      <Card
+        shadow="sm"
+        radius="sm"
+        fullWidth
+        className="w-full h-full hover:shadow-md"
+      >
+        <CardHeader className="flex items-center justify-between bg-gray-100 dark:bg-neutral-800">
+          <p>{previewData?.uiName as string}</p>
+          <Link href={`/components/${previewData?.uniqueSlug}`}>
+            <Chip size="sm">{"</> View Code"}</Chip>
+          </Link>
+        </CardHeader>
+        <Divider />
         <CardBody>
           <ComponentPreviewIframe
             iframeRef={iframeRef}
             componentTitle={previewData?.uiName as string}
           />
         </CardBody>
-        <Divider />
-        <CardFooter className="flex justify-between items-center">
-          <p>{previewData?.uiName as string}</p>
-          <Link href={`/components/${previewData?.uniqueSlug}`}>
-            <Chip>{"</> View Code"}</Chip>
-          </Link>
-        </CardFooter>
       </Card>
     </div>
   );

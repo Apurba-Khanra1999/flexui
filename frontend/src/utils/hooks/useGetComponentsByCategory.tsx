@@ -8,7 +8,6 @@ export default function useGetComponentsByCategory({
 }: {
   categoryId: string | number;
 }) {
-  console.log(categoryId);
   const { data, isLoading } = useQuery({
     refetchOnMount: true,
     queryKey: [GET_DOCS_LIST_WITH_CODE],
