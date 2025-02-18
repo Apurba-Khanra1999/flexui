@@ -1,8 +1,6 @@
 import ComponentPreview from "@/components/CodeComponets/ComponentPreview";
 import { Loader } from "@/components/ui/Loader";
 import useGetComponentsByCategory from "@/utils/hooks/useGetComponentsByCategory";
-import { Chip } from "@heroui/react";
-import Link from "next/link";
 
 export const UIComponentsPreviewShowcase = ({
   categoryId,

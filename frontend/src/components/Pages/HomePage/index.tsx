@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import { UICollectionItem } from "@/components/UICollections/UICollectionItem";
-import { UICollectionsWrapper } from "@/components/UICollections/UICollectionsWrapper";
-import { DemoData } from "@/utils/data/DemoData";
 import { HeroSection } from "./HomePageComponets/HeroSection";
 import { MainFeatures } from "./HomePageComponets/MainFeatures";
-import WhyChooseUs from "./HomePageComponets/WhyChooseUs";
 import PricingSection from "./HomePageComponets/PricingSection";
+import SampleUI from "./HomePageComponets/SampleUI";
+import SubscribeBox from "./HomePageComponets/SubscribeBox";
+import Usages from "./HomePageComponets/Usages";
+import WhyChooseUs from "./HomePageComponets/WhyChooseUs";
 
 export const HomePage = () => {
   return (
@@ -14,7 +14,14 @@ export const HomePage = () => {
       <HeroSection />
 
       <div>
+        <SampleUI />
+      </div>
+
+      <div>
         <MainFeatures />
+      </div>
+      <div>
+        <Usages />
       </div>
       <div>
         <WhyChooseUs />
@@ -22,7 +29,14 @@ export const HomePage = () => {
       <div className="my-20">
         <PricingSection />
       </div>
-      <div className="my-12">
+      <div>
+        <SubscribeBox />
+      </div>
+      {/* <div className="my-12">
+        <UICollectionsWrapper
+          title="UI Components"
+          subtitle="Copy Components as HTML/CSS, Tailwind, TSX, JSX and Vue."
+        ><div className="my-12">
         <UICollectionsWrapper
           title="UI Components"
           subtitle="Copy Components as HTML/CSS, Tailwind, TSX, JSX and Vue."
@@ -37,6 +51,16 @@ export const HomePage = () => {
           ))}
         </UICollectionsWrapper>
       </div>
+          {DemoData.map((item, index) => (
+            <UICollectionItem
+              key={index}
+              icon={item.icon}
+              title={item.title}
+              subtitle={item.subtitle}
+            />
+          ))}
+        </UICollectionsWrapper>
+      </div> */}
     </div>
   );
 };

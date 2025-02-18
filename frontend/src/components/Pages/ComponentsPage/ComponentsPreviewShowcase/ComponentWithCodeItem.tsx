@@ -1,13 +1,6 @@
 import ComponentPreviewIframe from "@/components/CodeComponets/ComponentPreviewIframe";
 import { useIframeRenderer } from "@/utils/hooks/useIframeRenderer";
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Chip,
-  Divider,
-} from "@heroui/react";
+import { Card, CardBody, CardHeader, Chip, Divider } from "@heroui/react";
 import Link from "next/link";
 import React from "react";
 

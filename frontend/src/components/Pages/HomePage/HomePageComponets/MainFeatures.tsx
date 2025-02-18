@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardBody, CardHeader, Chip, Divider } from "@heroui/react";
+import { Card, CardBody, Chip } from "@heroui/react";
 import { BsFeather } from "react-icons/bs";
 import { FaRegMoon } from "react-icons/fa";
 import { FaWandMagicSparkles } from "react-icons/fa6";

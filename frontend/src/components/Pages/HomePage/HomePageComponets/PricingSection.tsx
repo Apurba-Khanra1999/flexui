@@ -6,11 +6,10 @@ import {
   Chip,
   Divider,
 } from "@heroui/react";
-import React from "react";
 import { FaCheckCircle } from "react-icons/fa";
-import { MdOutlineElectricBolt } from "react-icons/md";
-import { LuLayers } from "react-icons/lu";
 import { FaWandMagicSparkles } from "react-icons/fa6";
+import { LuLayers } from "react-icons/lu";
+import { MdOutlineElectricBolt } from "react-icons/md";
 
 export default function PricingSection() {
   const PricingData = [

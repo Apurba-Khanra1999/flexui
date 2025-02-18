@@ -16,8 +16,8 @@ export default function ComponentPreview({
 }: {
   code: string;
   componentTitle: string;
-  uniqueSlug: string;
-  showVisit: boolean;
+  uniqueSlug?: string;
+  showVisit?: boolean;
 }) {
   const [componentBreakpoint, setComponetBreakpoint] =
     useState<ComponentBreakpointsType>({ name: "full", width: "100%" });

@@ -2,7 +2,7 @@ import React from "react";
 
 export const SampleBadge = () => {
   return (
-    <div className="badge badge-success gap-2 animate-float hover:animate-none">
+    <div className="badge badge-success gap-2">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

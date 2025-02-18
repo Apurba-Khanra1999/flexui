@@ -1,6 +1,4 @@
-import React from "react";
 import { Intro } from "./Intro";
-import { HeroSampleUI } from "./HeroSampleUI";
 
 export const HeroSection = () => {
   return (

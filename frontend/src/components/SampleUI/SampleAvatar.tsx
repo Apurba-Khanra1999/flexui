@@ -3,7 +3,7 @@ import React from "react";
 
 export const SampleAvatar = () => {
   return (
-    <div className="flex -space-x-2 overflow-hidden animate-float hover:animate-none">
+    <div className="flex -space-x-2 overflow-hidden">
       <Image
         alt="avatar"
         width={32}

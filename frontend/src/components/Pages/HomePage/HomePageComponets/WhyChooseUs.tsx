@@ -1,6 +1,5 @@
 "use client";
-import { Chip, Divider } from "@heroui/react";
-import React from "react";
+import { Chip } from "@heroui/react";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
 export default function WhyChooseUs() {
@@ -25,9 +24,9 @@ export default function WhyChooseUs() {
       <div className="bg-neutral-100 mt-14 py-5 rounded-xl">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:px-28">
           {wcuData.map((item, index) => (
-            <>
+            <div key={index}>
               {/* <Divider  /> */}
-              <div key={index} className="flex flex-col items-center gap-6">
+              <div  className="flex flex-col items-center gap-6">
                 <div>
                   <h4 className="text-7xl font-black">{item.numbers}</h4>
                 </div>
@@ -42,7 +41,7 @@ export default function WhyChooseUs() {
                 </div>
               </div>
               {/* {index - 1 == wcuData.length && <Divider />} */}
-            </>
+            </div>
           ))}
         </div>
       </div>

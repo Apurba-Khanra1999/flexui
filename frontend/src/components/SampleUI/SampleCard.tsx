@@ -3,7 +3,7 @@ import React from "react";
 
 export const SampleCard = () => {
   return (
-    <div className="card card-compact dark:bg-base-100  shadow-xl animate-float hover:animate-none">
+    <div className="card card-compact dark:bg-base-100  shadow-xl">
       <figure>
         <Image
           src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
