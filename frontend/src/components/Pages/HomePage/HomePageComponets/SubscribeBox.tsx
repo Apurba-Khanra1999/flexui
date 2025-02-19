@@ -3,7 +3,7 @@ import { Button, Input } from "@heroui/react";
 export default function SubscribeBox() {
   return (
     <div className="bg-primary lg:p-16 md:p-8 p-1 rounded-3xl">
-      <div className="text-center flex flex-col gap-5 lg:py-[4.5rem] p-6 items-center bg-white rounded-2xl">
+      <div className="text-center flex flex-col gap-5 lg:py-[4.5rem] p-6 items-center bg-neutral-100 dark:bg-neutral-900 rounded-2xl">
         <div className="max-w-3xl ">
           <h3 className="text-5xl font-bold">
             Experience the Future of Software Automation Try Fixora Today !

@@ -5,6 +5,7 @@ import { MainFeatures } from "./HomePageComponets/MainFeatures";
 import PricingSection from "./HomePageComponets/PricingSection";
 import SampleUI from "./HomePageComponets/SampleUI";
 import SubscribeBox from "./HomePageComponets/SubscribeBox";
+import Testimonials from "./HomePageComponets/Testimonials";
 import Usages from "./HomePageComponets/Usages";
 import WhyChooseUs from "./HomePageComponets/WhyChooseUs";
 
@@ -28,6 +29,9 @@ export const HomePage = () => {
       </div>
       <div className="my-20">
         <PricingSection />
+      </div>
+      <div>
+        <Testimonials />
       </div>
       <div>
         <SubscribeBox />

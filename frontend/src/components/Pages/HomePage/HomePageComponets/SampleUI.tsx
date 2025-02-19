@@ -11,7 +11,7 @@ import React from "react";
 export default function SampleUI() {
   return (
     <div className="my-24">
-      <div className="flex flex-col gap-6 xl:flex-row xl:gap-0 items-start justify-between px-6 xl:px-16 py-8 rounded-md bg-neutral-100">
+      <div className="flex flex-col gap-6 xl:flex-row xl:gap-0 items-start justify-between px-6 xl:px-16 py-8 rounded-md bg-neutral-100 dark:bg-neutral-900">
         <div className="flex flex-col gap-7">
           <SampleAlert />
           <SampleLoading />

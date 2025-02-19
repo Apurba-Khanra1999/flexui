@@ -5,7 +5,7 @@
   "scripts": {
     "css": "npx @tailwindcss/cli -i ./src/app/globals.css -o ./public/globals.css",
     "dev": "next dev --turbopack",
-    "build": "npm run css && next build",
+    "build": "pnpm run css && next build",
     "start": "next start",
     "lint": "next lint",
     "build:production": "next build && css"
@@ -31,10 +31,12 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
+    "react-slick": "^0.30.3",
     "react-syntax-highlighter": "^15.6.1",
     "react-toastify": "^11.0.3",
     "rehype-highlight": "^7.0.1",
     "remark-gfm": "^4.0.0",
+    "slick-carousel": "^1.8.1",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7"
   },
@@ -45,6 +47,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/react-slick": "^0.23.13",
     "@types/react-syntax-highlighter": "^15.5.13",
     "daisyui": "^4.12.23",
     "eslint": "^9",

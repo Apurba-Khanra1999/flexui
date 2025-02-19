@@ -21,7 +21,7 @@ export default function WhyChooseUs() {
           A set of beautifully-designed, accessible, and customizable
         </h3>
       </div>
-      <div className="bg-neutral-100 mt-14 py-5 rounded-xl">
+      <div className="bg-neutral-100 dark:bg-neutral-900 mt-14 py-5 rounded-xl">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:px-28">
           {wcuData.map((item, index) => (
             <div key={index}>
